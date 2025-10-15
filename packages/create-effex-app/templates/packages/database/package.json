@@ -2,17 +2,16 @@
   "name": "@workspace/database",
   "version": "0.0.0",
   "scripts": {
-    "db:generate": "npx prisma generate && npm run effect:generate",
-    "db:format": "npx prisma format",
-    "db:seed": "npx prisma db seed",
-    "db:migrate": "npx prisma migrate deploy",
-    "db:push": "npx prisma db push",
-    "db:studio": "npx prisma studio",
-    "effect:generate": "effex gen"
+    "db:generate": "bun x prisma generate && npm run effect:generate",
+    "db:format": "bun x prisma format",
+    "db:seed": "bun x prisma db seed",
+    "db:migrate": "bun x prisma migrate deploy",
+    "db:push": "bun x prisma db push",
+    "db:studio": "bun x prisma studio",
+    "effect:generate": "bun x effex-gen@latest gen"
   },
   "devDependencies": {
     "@types/node": "^20.19.9",
-    "effex-gen": "workspace:*",
     "prisma": "^6.16.1"
   },
   "dependencies": {
