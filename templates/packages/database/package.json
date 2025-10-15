@@ -1,0 +1,42 @@
+{
+  "name": "@workspace/database",
+  "version": "0.0.0",
+  "scripts": {
+    "db:generate": "npx prisma generate && npx tsx scripts/generate-effect-schemas.ts",
+    "db:format": "npx prisma format",
+    "db:seed": "npx prisma db seed",
+    "db:migrate": "npx drizzle-kit migrate",
+    "db:push": "npx drizzle-kit push",
+    "db:studio": "npx drizzle-kit studio",
+    "generate:effects": "npx tsx scripts/generate-effect-schemas.ts"
+  },
+  "devDependencies": {
+    "@prisma/generator-helper": "^6.16.1",
+    "@types/node": "^20.19.9",
+    "drizzle-kit": "^0.31.4",
+    "drizzle-prisma-generator": "^0.1.7",
+    "prisma": "^6.16.1",
+    "tsx": "^4.19.2"
+  },
+  "dependencies": {
+    "@effect/experimental": "^0.55.0",
+    "@effect/platform": "^0.91.1",
+    "@effect/sql": "^0.45.0",
+    "@effect/sql-drizzle": "^0.44.0",
+    "@effect/sql-pg": "^0.46.0",
+    "@prisma/client": "^6.16.1",
+    "@types/pg": "^8.15.5",
+    "drizzle-orm": "^0.44.5",
+    "effect": "^3.17.14",
+    "pg": "^8.16.3"
+  },
+  "exports": {
+    "./drizzle/client": "./src/drizzle-client.ts",
+    "./effect/client": "./src/effect-client.ts",
+    "./drizzle/schema": "./src/generated/drizzle/schema.ts",
+    "./effect/*": "./src/generated/effect/*.ts"
+  },
+  "prisma": {
+    "seed": "npx tsx scripts/seed.ts"
+  }
+}
