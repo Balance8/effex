@@ -10,15 +10,12 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@effect/experimental": "^0.55.0",
     "@effect/platform": "^0.91.1",
     "@effect/platform-node": "^0.97.0",
     "@effect/sql": "^0.45.0",
-    "@effect/sql-drizzle": "^0.44.0",
     "@effect/sql-pg": "^0.46.0",
     "@workspace/database": "workspace:*",
     "@workspace/ui": "workspace:*",
-    "drizzle-orm": "^0.44.5",
     "effect": "^3.17.14",
     "next": "^15.6.0",
     "react": "^19.1.1",

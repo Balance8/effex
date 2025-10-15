@@ -3,11 +3,6 @@ generator client {
   output   = "../generated/prisma"
 }
 
-generator drizzle {
-  provider = "drizzle-prisma-generator"
-  output   = "../src/generated/drizzle"
-}
-
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
@@ -22,4 +17,3 @@ model User {
 
   @@map("user")
 }
-

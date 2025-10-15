@@ -3,6 +3,7 @@ import { NodeContext, NodeRuntime } from '@effect/platform-node'
 import { Effect } from 'effect'
 
 import { createProject } from './commands/create.js'
+import { generateServices } from './commands/generate-services.js'
 
 const projectName = Args.text({ name: 'project-name' })
 
@@ -56,7 +57,34 @@ const createCommand = Command.make(
   options => createProject(options)
 )
 
-const cli = Command.run(createCommand, {
+const schemaPathOption = Options.text('schema-path').pipe(
+  Options.optional,
+  Options.withDescription('Path to Prisma schema file')
+)
+
+const outputDirOption = Options.text('output-dir').pipe(
+  Options.optional,
+  Options.withDescription('Output directory for generated services')
+)
+
+const generateCommand = Command.make(
+  'generate',
+  {
+    schemaPath: schemaPathOption,
+    outputDir: outputDirOption,
+  },
+  ({ schemaPath, outputDir }) =>
+    generateServices({
+      schemaPath,
+      outputDir,
+    })
+)
+
+const mainCommand = Command.make('effex', {}, () => Effect.void).pipe(
+  Command.withSubcommands([createCommand, generateCommand])
+)
+
+const cli = Command.run(mainCommand, {
   name: 'effex',
   version: '0.0.1',
 })
