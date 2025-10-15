@@ -12,7 +12,7 @@
   },
   "devDependencies": {
     "@types/node": "^20.19.9",
-    "effex": "workspace:*",
+    "effex-gen": "workspace:*",
     "prisma": "^6.16.1"
   },
   "dependencies": {
@@ -26,7 +26,8 @@
   "exports": {
     "./effect/client": "./src/effect-client.ts",
     "./effect/schemas/*": "./src/generated/effect/schemas/*.ts",
-    "./effect/services/*": "./src/generated/effect/services/*.ts"
+    "./effect/services/*": "./src/generated/effect/services/*.ts",
+    "./prisma": "./generated/prisma/index.js"
   },
   "prisma": {
     "seed": "npx tsx scripts/seed.ts"

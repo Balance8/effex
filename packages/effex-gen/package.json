@@ -1,14 +1,13 @@
 {
-  "name": "create-effex-app",
-  "version": "0.1.1",
-  "description": "Create a new Effex app with a single command",
+  "name": "effex-gen",
+  "version": "0.1.0",
+  "description": "CLI tool for generating Effect-TS services from Prisma schemas",
   "type": "module",
   "bin": {
-    "create-effex-app": "./dist/index.js"
+    "effex": "./dist/index.js"
   },
   "files": [
-    "dist",
-    "templates"
+    "dist"
   ],
   "scripts": {
     "build": "tsup",
@@ -20,6 +19,7 @@
     "@effect/platform": "^0.91.1",
     "@effect/platform-node": "^0.97.0",
     "@effect/schema": "^0.75.5",
+    "@mrleebo/prisma-ast": "^0.13.0",
     "effect": "^3.17.14",
     "picocolors": "^1.1.1"
   },
@@ -32,24 +32,17 @@
     "node": ">=20"
   },
   "keywords": [
-    "create-app",
-    "scaffold",
-    "turborepo",
-    "nextjs",
     "prisma",
     "effect-ts",
-    "biome",
-    "ultracite"
+    "code-generation",
+    "ast",
+    "cli"
   ],
   "author": "Michael Slocum",
   "license": "MIT",
   "repository": {
     "type": "git",
     "url": "https://github.com/Balance8/effex.git",
-    "directory": "packages/create-effex-app"
-  },
-  "bugs": {
-    "url": "https://github.com/Balance8/effex/issues"
-  },
-  "homepage": "https://github.com/Balance8/effex#readme"
+    "directory": "packages/effex"
+  }
 }
