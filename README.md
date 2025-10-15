@@ -10,14 +10,28 @@ A CLI tool to scaffold modern full-stack applications with:
 
 ## Quick Start
 
+### Using npm create (Recommended)
+
 ```bash
-npx effex create my-app
-cd my-app
+npm create effex-app
 ```
 
-Or with options:
+Or with a project name:
 
 ```bash
+npm create effex-app my-app
+```
+
+### Using npx
+
+```bash
+npx effex create my-app
+```
+
+### With Options
+
+```bash
+npm create effex-app my-app --package-manager bun --database postgresql
 npx effex create my-app --package-manager bun --database postgresql
 ```
 

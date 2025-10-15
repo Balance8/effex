@@ -3,7 +3,11 @@ import { join } from 'node:path'
 import { defineConfig } from 'tsup'
 
 export default defineConfig({
-  entry: ['src/index.ts'],
+  entry: {
+    index: 'src/index.ts',
+    'commands/create': 'src/commands/create.ts',
+    'commands/generate-services': 'src/commands/generate-services.ts',
+  },
   format: ['esm'],
   target: 'node20',
   platform: 'node',

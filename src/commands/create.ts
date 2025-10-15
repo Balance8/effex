@@ -1,5 +1,5 @@
 import { FileSystem } from '@effect/platform'
-import { Console, Effect, Schema } from 'effect'
+import { Console, Effect, Option, Schema } from 'effect'
 import pc from 'picocolors'
 
 import { showBanner, showSuccess } from '../utils/banner.js'
@@ -12,7 +12,7 @@ const PackageManagerSchema = Schema.Literal('bun', 'pnpm', 'npm')
 const DatabaseSchema = Schema.Literal('postgresql', 'mysql', 'sqlite')
 
 const CreateProjectOptionsSchema = Schema.Struct({
-  projectName: Schema.String,
+  projectName: Schema.OptionFromSelf(Schema.String),
   packageManager: PackageManagerSchema,
   database: DatabaseSchema,
   skipInstall: Schema.Boolean,
@@ -22,14 +22,18 @@ const CreateProjectOptionsSchema = Schema.Struct({
   directory: Schema.OptionFromSelf(Schema.String),
 })
 
-export type CreateProjectOptions = Schema.Schema.Type<typeof CreateProjectOptionsSchema>
+export type CreateProjectOptions = typeof CreateProjectOptionsSchema.Type
 
 export const createProject = (options: CreateProjectOptions) =>
   Effect.gen(function* () {
-    const { projectName, packageManager, database, skipInstall, skipGit, auth, verbose } = options
+    const { packageManager, database, skipInstall, skipGit, auth, verbose } = options
     const fs = yield* FileSystem.FileSystem
 
     showBanner()
+
+    const projectName = Option.isSome(options.projectName)
+      ? Option.getOrThrow(options.projectName)
+      : 'my-effex-app'
 
     yield* Console.log(pc.cyan('✨ Creating your effex project...\n'))
 
