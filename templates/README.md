@@ -31,12 +31,14 @@ Dependencies should already be installed. If not, run:
 cp apps/web/.env.example apps/web/.env
 ```
 
-2. Generate Prisma client and run migrations:
+2. Generate Prisma client, Effect services, and run migrations:
 
 ```bash
 {{packageManager}} run db:generate
 {{packageManager}} run db:migrate
 ```
+
+> **Note:** `db:generate` automatically generates both the Prisma client and Effect-TS services from your schema.
 
 3. (Optional) Seed the database:
 
@@ -53,6 +55,23 @@ Start the development server:
 ```
 
 The app will be available at [http://localhost:3000](http://localhost:3000).
+
+## Working with Effect Services
+
+This project automatically generates type-safe Effect-TS services from your Prisma schema. After running `db:generate`, you can import and use services like this:
+
+```typescript
+import { Effect } from 'effect';
+import { UserService } from '@workspace/database/effect/services/UserService';
+
+const program = Effect.gen(function* () {
+  const userService = yield* UserService;
+  const users = yield* userService.findMany();
+  return users;
+});
+```
+
+Services are automatically regenerated whenever you run `{{packageManager}} run db:generate`.
 
 ## Project Structure
 
@@ -71,14 +90,26 @@ The app will be available at [http://localhost:3000](http://localhost:3000).
 
 ## Available Scripts
 
+### Development
+
 - `{{packageManager}} run dev` - Start development server
 - `{{packageManager}} run build` - Build all packages
+
+### Code Quality
+
 - `{{packageManager}} run format-and-lint` - Check code formatting and linting
 - `{{packageManager}} run format-and-lint:fix` - Fix code formatting and linting issues
-- `{{packageManager}} run db:generate` - Generate Prisma client
+
+### Database
+
+- `{{packageManager}} run db:generate` - Generate Prisma client and Effect services
 - `{{packageManager}} run db:migrate` - Run database migrations
 - `{{packageManager}} run db:seed` - Seed the database
 - `{{packageManager}} run db:studio` - Open Prisma Studio
+
+### Effect Services
+
+- `{{packageManager}} run effect:generate` - Regenerate Effect services from Prisma schema (auto-runs with db:generate)
 
 ## Learn More
 
@@ -87,4 +118,3 @@ The app will be available at [http://localhost:3000](http://localhost:3000).
 - [Effect Documentation](https://effect.website)
 - [Turbo Documentation](https://turbo.build/repo/docs)
 - [Biome Documentation](https://biomejs.dev)
-

@@ -88,7 +88,7 @@ function generateServiceFile(model: Model): string {
   return `import { Context, Data, Effect, Layer, Schema } from 'effect'
 import { PrismaClient } from '@prisma/client'
 
-import { insert${model.name}Schema, select${model.name}Schema } from '@workspace/database/effect/${modelLower}-schemas'
+import { insert${model.name}Schema, select${model.name}Schema } from '@workspace/database/effect/schemas/${modelLower}-schemas'
 
 export class DatabaseError extends Data.TaggedError('DatabaseError')<{
   readonly cause: unknown

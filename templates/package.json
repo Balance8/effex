@@ -11,6 +11,7 @@
     "db:migrate": "turbo run db:migrate",
     "db:seed": "turbo run db:seed",
     "db:studio": "turbo run db:studio",
+    "effect:generate": "cd packages/database && effex gen",
     "clean": "turbo run clean",
     "prepare": "husky"
   },

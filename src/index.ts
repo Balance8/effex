@@ -68,6 +68,19 @@ const outputDirOption = Options.text('output-dir').pipe(
 )
 
 const generateCommand = Command.make(
+  'gen',
+  {
+    schemaPath: schemaPathOption,
+    outputDir: outputDirOption,
+  },
+  ({ schemaPath, outputDir }) =>
+    generateServices({
+      schemaPath,
+      outputDir,
+    })
+)
+
+const generateCommandAlias = Command.make(
   'generate',
   {
     schemaPath: schemaPathOption,
@@ -81,7 +94,7 @@ const generateCommand = Command.make(
 )
 
 const mainCommand = Command.make('effex', {}, () => Effect.void).pipe(
-  Command.withSubcommands([createCommand, generateCommand])
+  Command.withSubcommands([createCommand, generateCommand, generateCommandAlias])
 )
 
 const cli = Command.run(mainCommand, {
