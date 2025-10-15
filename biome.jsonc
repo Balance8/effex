@@ -148,6 +148,16 @@
           }
         }
       }
+    },
+    {
+      "includes": ["**/commitlint.config.js"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noMagicNumbers": "off"
+          }
+        }
+      }
     }
   ],
   "extends": ["ultracite"]

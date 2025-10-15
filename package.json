@@ -12,6 +12,8 @@
   "devDependencies": {
     "@biomejs/biome": "2.2.5",
     "@changesets/cli": "^2.27.1",
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
     "@types/bun": "^1.1.14",
     "@types/node": "^20.19.9",
     "husky": "^9.1.7",
@@ -42,5 +44,6 @@
   "bugs": {
     "url": "https://github.com/Balance8/effex/issues"
   },
-  "homepage": "https://github.com/Balance8/effex#readme"
+  "homepage": "https://github.com/Balance8/effex#readme",
+  "workspaces": ["packages/*"]
 }
