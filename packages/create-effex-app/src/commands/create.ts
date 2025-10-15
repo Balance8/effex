@@ -6,6 +6,7 @@ import { showBanner, showSuccess } from '../utils/banner.js'
 import { copyTemplates } from '../utils/copy-templates.js'
 import { initializeGit } from '../utils/git.js'
 import { installDependencies } from '../utils/install-dependencies.js'
+import { promptDatabase, promptPackageManager, promptProjectName } from '../utils/prompts.js'
 import { validateProjectName } from '../utils/validate.js'
 
 const PackageManagerSchema = Schema.Literal('bun', 'pnpm', 'npm')
@@ -26,16 +27,26 @@ export type CreateProjectOptions = typeof CreateProjectOptionsSchema.Type
 
 export const createProject = (options: CreateProjectOptions) =>
   Effect.gen(function* () {
-    const { packageManager, database, skipInstall, skipGit, auth, verbose } = options
+    const {
+      packageManager: defaultPackageManager,
+      database: defaultDatabase,
+      skipInstall,
+      skipGit,
+      auth,
+      verbose,
+    } = options
     const fs = yield* FileSystem.FileSystem
 
     showBanner()
 
     const projectName = Option.isSome(options.projectName)
       ? Option.getOrThrow(options.projectName)
-      : 'my-effex-app'
+      : yield* promptProjectName('my-effex-app')
 
-    yield* Console.log(pc.cyan('✨ Creating your effex project...\n'))
+    const packageManager = yield* promptPackageManager(defaultPackageManager)
+    const database = yield* promptDatabase(defaultDatabase)
+
+    yield* Console.log(pc.cyan('\n✨ Creating your effex project...\n'))
 
     if (verbose) {
       yield* Console.log(pc.gray('Configuration:'))
