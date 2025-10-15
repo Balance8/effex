@@ -5,19 +5,19 @@ The easiest way to create a new Effex app.
 ## Usage
 
 ```bash
-npm create effex-app
+npm create-effex-app
 ```
 
 Or with a project name:
 
 ```bash
-npm create effex-app my-app
+npm create-effex-app my-app
 ```
 
 With options:
 
 ```bash
-npm create effex-app my-app --package-manager bun --database postgresql
+npm create-effex-app my-app --package-manager bun --database postgresql
 ```
 
 ## What You Get
