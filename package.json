@@ -45,5 +45,7 @@
     "url": "https://github.com/Balance8/effex/issues"
   },
   "homepage": "https://github.com/Balance8/effex#readme",
-  "workspaces": ["packages/*"]
+  "workspaces": [
+    "packages/*"
+  ]
 }
