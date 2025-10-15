@@ -40,8 +40,7 @@ A modern full-stack monorepo with:
 
 ## Learn More
 
+- [Effex Documentation](https://github.com/Balance8/effex)
 - [Effect Documentation](https://effect.website)
 - [Prisma Documentation](https://www.prisma.io/docs)
 - [Next.js Documentation](https://nextjs.org/docs)
-- [Turbo Documentation](https://turbo.build/repo/docs)
-- [Biome Documentation](https://biomejs.dev)
