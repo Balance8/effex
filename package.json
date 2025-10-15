@@ -25,6 +25,8 @@
     "@effect/cli": "^0.51.0",
     "@effect/platform": "^0.91.1",
     "@effect/platform-node": "^0.97.0",
+    "@effect/schema": "^0.75.5",
+    "@mrleebo/prisma-ast": "^0.13.0",
     "effect": "^3.17.14",
     "picocolors": "^1.1.1"
   },
