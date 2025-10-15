@@ -15,30 +15,42 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v4
 
-      - name: Setup pnpm 8
-        uses: pnpm/action-setup@v3
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
         with:
-          version: 8
+          bun-version: latest
 
       - name: Setup Node.js 20.x
         uses: actions/setup-node@v4
         with:
           node-version: 20.x
+          registry-url: "https://registry.npmjs.org"
 
       - name: Install Dependencies
-        run: pnpm i
+        run: bun install
 
-      - name: Create Release Pull Request or Publish to npm
-        id: changesets
-        uses: changesets/action@v1
-        with:
-          # This expects you to have a script called release which does a build for your packages and calls changeset publish
-          publish: pnpm release
+      - name: Build create-effex-app
+        run: cd packages/create-effex-app && bun run build
+
+      - name: Check if version exists on npm
+        id: check-version
+        run: |
+          cd packages/create-effex-app
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          if npm view create-effex-app@$PACKAGE_VERSION version 2>/dev/null; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+            echo "Version $PACKAGE_VERSION already exists on npm"
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "Version $PACKAGE_VERSION does not exist, will publish"
+          fi
+
+      - name: Publish to npm
+        if: steps.check-version.outputs.exists == 'false'
+        run: cd packages/create-effex-app && npm publish
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Send a Slack notification if a publish happens
-        if: steps.changesets.outputs.published == 'true'
-        # You can do something when a publish happens.
-        run: my-slack-bot send-notification --message "A new version of ${GITHUB_REPOSITORY} was published!"
+      - name: Skip publish
+        if: steps.check-version.outputs.exists == 'true'
+        run: echo "Skipping publish - version already exists on npm"
