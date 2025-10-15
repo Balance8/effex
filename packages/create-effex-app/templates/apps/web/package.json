@@ -1,0 +1,31 @@
+{
+  "name": "web",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@effect/platform": "^0.91.1",
+    "@effect/platform-node": "^0.97.0",
+    "@effect/sql": "^0.45.0",
+    "@effect/sql-pg": "^0.46.0",
+    "@workspace/database": "workspace:*",
+    "@workspace/ui": "workspace:*",
+    "effect": "^3.17.14",
+    "next": "^15.6.0",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.9",
+    "@types/react": "^19.1.9",
+    "@types/react-dom": "^19.1.7",
+    "@workspace/typescript-config": "workspace:*",
+    "typescript": "^5.9.2"
+  }
+}

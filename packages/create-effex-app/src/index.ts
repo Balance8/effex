@@ -1,7 +1,8 @@
 import { Args, Command, Options } from '@effect/cli'
 import { NodeContext, NodeRuntime } from '@effect/platform-node'
 import { Effect } from 'effect'
-import { createProject } from 'effex/commands/create'
+
+import { createProject } from './commands/create.js'
 
 const projectName = Args.text({ name: 'project-name' }).pipe(Args.optional)
 

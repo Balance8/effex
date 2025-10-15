@@ -7,7 +7,8 @@
     "create-effex-app": "./dist/index.js"
   },
   "files": [
-    "dist"
+    "dist",
+    "templates"
   ],
   "scripts": {
     "build": "tsup",
@@ -19,7 +20,6 @@
     "@effect/platform-node": "^0.97.0",
     "@effect/schema": "^0.75.5",
     "effect": "^3.17.14",
-    "effex": "workspace:*",
     "picocolors": "^1.1.1"
   },
   "devDependencies": {

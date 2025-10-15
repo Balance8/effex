@@ -1,0 +1,34 @@
+{
+  "name": "@workspace/database",
+  "version": "0.0.0",
+  "scripts": {
+    "db:generate": "npx prisma generate && npm run effect:generate",
+    "db:format": "npx prisma format",
+    "db:seed": "npx prisma db seed",
+    "db:migrate": "npx prisma migrate deploy",
+    "db:push": "npx prisma db push",
+    "db:studio": "npx prisma studio",
+    "effect:generate": "effex gen"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.9",
+    "effex": "^0.0.1",
+    "prisma": "^6.16.1"
+  },
+  "dependencies": {
+    "@effect/platform": "^0.91.1",
+    "@effect/schema": "^0.75.5",
+    "@effect/sql": "^0.45.0",
+    "@effect/sql-pg": "^0.46.0",
+    "@prisma/client": "^6.16.1",
+    "effect": "^3.17.14"
+  },
+  "exports": {
+    "./effect/client": "./src/effect-client.ts",
+    "./effect/schemas/*": "./src/generated/effect/schemas/*.ts",
+    "./effect/services/*": "./src/generated/effect/services/*.ts"
+  },
+  "prisma": {
+    "seed": "npx tsx scripts/seed.ts"
+  }
+}
