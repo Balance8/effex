@@ -1,39 +1,13 @@
 {
   "name": "effex",
   "version": "0.0.1",
-  "description": "A CLI tool to scaffold a Turbo repo with Next.js, Prisma, Biome with Ultracite, and Effect-TS",
-  "type": "module",
-  "bin": {
-    "effex": "./dist/index.js"
-  },
-  "files": [
-    "dist",
-    "templates"
-  ],
-  "exports": {
-    ".": "./dist/index.js",
-    "./commands/create": "./dist/commands/create.js",
-    "./commands/generate-services": "./dist/commands/generate-services.js"
-  },
+  "private": true,
+  "description": "Monorepo for create-effex-app - A CLI tool to scaffold modern full-stack apps",
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
+    "build": "cd packages/create-effex-app && bun run build",
     "format-and-lint": "biome check .",
     "format-and-lint:fix": "biome check . --write --unsafe",
-    "changeset": "changeset",
-    "version-packages": "changeset version",
-    "release": "bun run build && changeset publish",
-    "prepare": "husky",
-    "test": "bun test"
-  },
-  "dependencies": {
-    "@effect/cli": "^0.51.0",
-    "@effect/platform": "^0.91.1",
-    "@effect/platform-node": "^0.97.0",
-    "@effect/schema": "^0.75.5",
-    "@mrleebo/prisma-ast": "^0.13.0",
-    "effect": "^3.17.14",
-    "picocolors": "^1.1.1"
+    "prepare": "husky"
   },
   "devDependencies": {
     "@biomejs/biome": "2.2.5",
