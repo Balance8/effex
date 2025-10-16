@@ -33,6 +33,13 @@ type TemplateVariables = {
   packageManager: 'bun' | 'pnpm' | 'npm'
 }
 
+function shouldSkipFile(entry: string, packageManager: 'bun' | 'pnpm' | 'npm'): boolean {
+  if (entry === 'pnpm-workspace.yaml' && packageManager !== 'pnpm') {
+    return true
+  }
+  return false
+}
+
 function copyDirectorySync(
   source: string,
   destination: string,
@@ -43,6 +50,10 @@ function copyDirectorySync(
   const entries = readdirSync(source)
 
   for (const entry of entries) {
+    if (shouldSkipFile(entry, variables.packageManager)) {
+      continue
+    }
+
     const sourcePath = join(source, entry)
     let destPath = join(destination, entry)
     const stat = statSync(sourcePath)
@@ -58,5 +69,9 @@ function copyDirectorySync(
       const processedContent = replaceVariables(content, variables)
       writeFileSync(destPath, processedContent, 'utf-8')
     }
+  }
+
+  if (variables.packageManager === 'bun') {
+    writeFileSync(join(destination, 'bun.lockb'), '', 'utf-8')
   }
 }
