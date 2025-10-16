@@ -33,15 +33,15 @@ Dependencies should already be installed. If not, run:
 cp apps/web/.env.example apps/web/.env
 ```
 
-2. Generate Prisma client and Effect services:
+2. Generate Prisma client:
 
 ```bash
 {{packageManager}} run db:generate
 ```
 
-> **Note:** This generates both the Prisma client and Effect-TS services from your schema. The generated files are gitignored and must be generated locally.
+> **Note:** This generates both the Prisma client and Effect-TS services from your schema.
 
-3. Run database migrations:
+1. Run database migrations:
 
 ```bash
 {{packageManager}} run db:migrate
@@ -65,7 +65,7 @@ The app will be available at [http://localhost:3000](http://localhost:3000).
 
 ## Working with Effect Services
 
-This project automatically generates type-safe Effect-TS services from your Prisma schema. After running `db:generate`, you can import and use services like this:
+This project includes type-safe Effect-TS services automatically generated from your Prisma schema. These services are committed to version control, so you can use them immediately:
 
 ```typescript
 import { Effect } from 'effect';
@@ -78,7 +78,7 @@ const program = Effect.gen(function* () {
 });
 ```
 
-Services are automatically regenerated whenever you run `{{packageManager}} run db:generate`.
+When you modify your Prisma schema, regenerate the services by running `{{packageManager}} run db:generate` and commit the changes.
 
 ## Project Structure
 

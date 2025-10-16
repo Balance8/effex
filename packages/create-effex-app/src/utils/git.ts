@@ -35,7 +35,7 @@ coverage
 .cache
 .temp
 .tmp
-packages/database/generated/
+packages/database/generated/prisma/
 `.trim()
 
     writeFileSync(join(normalizedPath, '.gitignore'), gitignoreContent, 'utf-8')
