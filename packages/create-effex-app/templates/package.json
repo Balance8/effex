@@ -12,8 +12,7 @@
     "db:seed": "turbo run db:seed",
     "db:studio": "turbo run db:studio",
     "effect:generate": "cd packages/database && bun x effex-gen@latest gen",
-    "clean": "turbo run clean",
-    "prepare": "husky"
+    "clean": "turbo run clean"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.2.5",

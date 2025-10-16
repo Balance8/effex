@@ -26,6 +26,11 @@ const skipGitOption = Options.boolean('skip-git').pipe(
   Options.withDescription('Skip git initialization')
 )
 
+const skipHuskyOption = Options.boolean('skip-husky').pipe(
+  Options.withDefault(false),
+  Options.withDescription('Skip git hooks setup with Husky')
+)
+
 const authOption = Options.boolean('auth').pipe(
   Options.withDefault(false),
   Options.withDescription('Include authentication setup')
@@ -49,6 +54,7 @@ const createCommand = Command.make(
     database: databaseOption,
     skipInstall: skipInstallOption,
     skipGit: skipGitOption,
+    skipHusky: skipHuskyOption,
     auth: authOption,
     verbose: verboseOption,
     directory: directoryOption,

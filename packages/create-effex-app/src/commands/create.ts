@@ -5,6 +5,7 @@ import pc from 'picocolors'
 import { showBanner, showSuccess } from '../utils/banner.js'
 import { copyTemplates } from '../utils/copy-templates.js'
 import { initializeGit } from '../utils/git.js'
+import { initHusky } from '../utils/init-husky.js'
 import { installDependencies } from '../utils/install-dependencies.js'
 import { promptDatabase, promptPackageManager, promptProjectName } from '../utils/prompts.js'
 import { validateProjectName } from '../utils/validate.js'
@@ -18,6 +19,7 @@ const CreateProjectOptionsSchema = Schema.Struct({
   database: DatabaseSchema,
   skipInstall: Schema.Boolean,
   skipGit: Schema.Boolean,
+  skipHusky: Schema.Boolean,
   auth: Schema.Boolean,
   verbose: Schema.Boolean,
   directory: Schema.OptionFromSelf(Schema.String),
@@ -32,6 +34,7 @@ export const createProject = (options: CreateProjectOptions) =>
       database: defaultDatabase,
       skipInstall,
       skipGit,
+      skipHusky,
       auth,
       verbose,
     } = options
@@ -55,7 +58,8 @@ export const createProject = (options: CreateProjectOptions) =>
       yield* Console.log(pc.gray(`  Database: ${database}`))
       yield* Console.log(pc.gray(`  Authentication: ${auth ? 'Yes' : 'No'}`))
       yield* Console.log(pc.gray(`  Skip install: ${skipInstall ? 'Yes' : 'No'}`))
-      yield* Console.log(pc.gray(`  Skip git: ${skipGit ? 'Yes' : 'No'}\n`))
+      yield* Console.log(pc.gray(`  Skip git: ${skipGit ? 'Yes' : 'No'}`))
+      yield* Console.log(pc.gray(`  Skip husky: ${skipHusky ? 'Yes' : 'No'}\n`))
     }
 
     yield* validateProjectName(projectName)
@@ -78,6 +82,12 @@ export const createProject = (options: CreateProjectOptions) =>
       yield* Console.log(pc.cyan('\n📦 Installing dependencies...\n'))
       yield* installDependencies(projectName, packageManager)
       yield* Console.log(pc.green('\n✅ Dependencies installed!'))
+
+      if (!(skipGit || skipHusky)) {
+        yield* Console.log(pc.gray('\n🪝 Setting up git hooks...'))
+        yield* initHusky(projectName, packageManager)
+        yield* Console.log(pc.green('✅ Git hooks configured!'))
+      }
     }
 
     showSuccess(projectName, packageManager, skipInstall)

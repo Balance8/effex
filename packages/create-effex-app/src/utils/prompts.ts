@@ -2,7 +2,8 @@ import { createInterface } from 'node:readline'
 import { Console, Effect } from 'effect'
 import pc from 'picocolors'
 
-type PackageManager = 'bun' | 'pnpm' | 'npm'
+import type { PackageManager } from './package-manager.js'
+
 type Database = 'postgresql' | 'mysql' | 'sqlite'
 
 const createReadlineInterface = () =>

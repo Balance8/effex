@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url'
 import { Console, Effect } from 'effect'
 import pc from 'picocolors'
 
+import type { PackageManager } from './package-manager.js'
 import { replaceVariables } from './replace-variables.js'
 
 const __filename = fileURLToPath(import.meta.url)
@@ -13,7 +14,7 @@ const _TEMPLATE_EXTENSION_REGEX = /\.template$/
 export const copyTemplates = (
   projectName: string,
   targetPath: string,
-  packageManager: 'bun' | 'pnpm' | 'npm'
+  packageManager: PackageManager
 ) =>
   Effect.gen(function* () {
     const templateDir = join(__dirname, '../templates')
@@ -30,10 +31,10 @@ export const copyTemplates = (
 
 type TemplateVariables = {
   projectName: string
-  packageManager: 'bun' | 'pnpm' | 'npm'
+  packageManager: PackageManager
 }
 
-function shouldSkipFile(entry: string, packageManager: 'bun' | 'pnpm' | 'npm'): boolean {
+function shouldSkipFile(entry: string, packageManager: PackageManager): boolean {
   if (entry === 'pnpm-workspace.yaml' && packageManager !== 'pnpm') {
     return true
   }
