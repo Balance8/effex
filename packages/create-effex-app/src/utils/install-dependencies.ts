@@ -14,6 +14,10 @@ export const installDependencies = (targetPath: string, packageManager: PackageM
       cwd: normalizedPath,
       stdio: 'inherit',
       shell: true,
+      env: {
+        ...process.env,
+        PRISMA_SKIP_POSTINSTALL_GENERATE: '1',
+      },
     })
 
     if (result.error) {
