@@ -10,7 +10,9 @@ export const installDependencies = (targetPath: string, packageManager: PackageM
   Effect.sync(() => {
     const normalizedPath = normalize(targetPath).replace(UNC_PATH_REGEX, '')
 
-    const result = spawnSync(packageManager, ['install'], {
+    const installArgs = packageManager === 'bun' ? ['install', '--force'] : ['install']
+
+    const result = spawnSync(packageManager, installArgs, {
       cwd: normalizedPath,
       stdio: 'inherit',
       shell: true,
