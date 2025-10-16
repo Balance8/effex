@@ -1,7 +1,7 @@
 const PACKAGE_MANAGER_VERSIONS = {
   bun: '1.3.0',
-  pnpm: '9.15.4',
-  npm: '11.0.0',
+  pnpm: '10.18.3',
+  npm: '11.6.2',
 } as const
 
 export const replaceVariables = (content: string, variables: Record<string, string>): string => {
