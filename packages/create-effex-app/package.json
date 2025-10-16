@@ -1,6 +1,6 @@
 {
   "name": "create-effex-app",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Create a new Effex app with a single command",
   "type": "module",
   "bin": {
@@ -16,11 +16,11 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@effect/cli": "^0.51.0",
-    "@effect/platform": "^0.91.1",
-    "@effect/platform-node": "^0.97.0",
+    "@effect/cli": "^0.71.0",
+    "@effect/platform": "^0.92.1",
+    "@effect/platform-node": "^0.98.3",
     "@effect/schema": "^0.75.5",
-    "effect": "^3.17.14",
+    "effect": "^3.18.4",
     "picocolors": "^1.1.1"
   },
   "devDependencies": {

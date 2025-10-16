@@ -16,6 +16,10 @@ ${pc.dim('   ━━━━━━━━━━━━━━━━━━━━━━�
 }
 
 export const showSuccess = (projectName: string, packageManager: string, skipInstall: boolean) => {
+  const installStep = skipInstall
+    ? `${pc.cyan('2.')} ${pc.bold(`${packageManager} install`)}\n  ${pc.cyan('3.')} ${pc.bold(`${packageManager} run db:generate`)}\n  ${pc.cyan('4.')} ${pc.bold(`${packageManager} run dev`)}`
+    : `${pc.cyan('2.')} ${pc.bold(`${packageManager} run db:generate`)}\n  ${pc.cyan('3.')} ${pc.bold(`${packageManager} run dev`)}`
+
   const message = `
 ${pc.green('╔═══════════════════════════════════════════════════════════╗')}
 ${pc.green('║')}                                                           ${pc.green('║')}
@@ -26,7 +30,7 @@ ${pc.green('╚═════════════════════�
 ${pc.bold('Next steps:')}
 
   ${pc.cyan('1.')} ${pc.bold(`cd ${projectName}`)}
-  ${skipInstall ? `${pc.cyan('2.')} ${pc.bold(`${packageManager} install`)}\n  ${pc.cyan('3.')} ${pc.bold(`${packageManager} run dev`)}` : `${pc.cyan('2.')} ${pc.bold(`${packageManager} run dev`)}`}
+  ${installStep}
 
 ${pc.dim('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')}
 
@@ -34,7 +38,7 @@ ${pc.bold('Available commands:')}
 
   ${pc.cyan(`${packageManager} run dev`)}        ${pc.dim('Start development server')}
   ${pc.cyan(`${packageManager} run build`)}      ${pc.dim('Build for production')}
-  ${pc.cyan(`${packageManager} run db:generate`)} ${pc.dim('Generate Prisma client')}
+  ${pc.cyan(`${packageManager} run db:generate`)} ${pc.dim('Generate Prisma client & Effect services')}
   ${pc.cyan(`${packageManager} run db:migrate`)}  ${pc.dim('Run database migrations')}
   ${pc.cyan(`${packageManager} run db:studio`)}   ${pc.dim('Open Prisma Studio')}
 

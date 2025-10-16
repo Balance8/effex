@@ -25,22 +25,29 @@ Dependencies should already be installed. If not, run:
 
 ### Database Setup
 
+**Important:** You must generate the Prisma client before running the app.
+
 1. Copy `.env.example` to `.env` and configure your database URL:
 
 ```bash
 cp apps/web/.env.example apps/web/.env
 ```
 
-2. Generate Prisma client, Effect services, and run migrations:
+2. Generate Prisma client and Effect services:
 
 ```bash
 {{packageManager}} run db:generate
+```
+
+> **Note:** This generates both the Prisma client and Effect-TS services from your schema. The generated files are gitignored and must be generated locally.
+
+3. Run database migrations:
+
+```bash
 {{packageManager}} run db:migrate
 ```
 
-> **Note:** `db:generate` automatically generates both the Prisma client and Effect-TS services from your schema.
-
-3. (Optional) Seed the database:
+4. (Optional) Seed the database:
 
 ```bash
 {{packageManager}} run db:seed

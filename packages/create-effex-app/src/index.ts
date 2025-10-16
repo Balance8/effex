@@ -7,33 +7,13 @@ import { createProject } from './commands/create.js'
 const projectName = Args.text({ name: 'project-name' }).pipe(Args.optional)
 
 const packageManagerOption = Options.choice('package-manager', ['bun', 'pnpm', 'npm']).pipe(
-  Options.withDefault('bun' as const),
+  Options.optional,
   Options.withDescription('Package manager to use')
 )
 
 const databaseOption = Options.choice('database', ['postgresql', 'mysql', 'sqlite']).pipe(
-  Options.withDefault('postgresql' as const),
+  Options.optional,
   Options.withDescription('Database provider to use')
-)
-
-const skipInstallOption = Options.boolean('skip-install').pipe(
-  Options.withDefault(false),
-  Options.withDescription('Skip installing dependencies')
-)
-
-const skipGitOption = Options.boolean('skip-git').pipe(
-  Options.withDefault(false),
-  Options.withDescription('Skip git initialization')
-)
-
-const skipHuskyOption = Options.boolean('skip-husky').pipe(
-  Options.withDefault(false),
-  Options.withDescription('Skip git hooks setup with Husky')
-)
-
-const authOption = Options.boolean('auth').pipe(
-  Options.withDefault(false),
-  Options.withDescription('Include authentication setup')
 )
 
 const verboseOption = Options.boolean('verbose').pipe(
@@ -52,10 +32,6 @@ const createCommand = Command.make(
     projectName,
     packageManager: packageManagerOption,
     database: databaseOption,
-    skipInstall: skipInstallOption,
-    skipGit: skipGitOption,
-    skipHusky: skipHuskyOption,
-    auth: authOption,
     verbose: verboseOption,
     directory: directoryOption,
   },

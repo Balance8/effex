@@ -1,61 +1,65 @@
-import { createInterface } from 'node:readline'
-import { Console, Effect } from 'effect'
-import pc from 'picocolors'
-
-import type { PackageManager } from './package-manager.js'
-
-type Database = 'postgresql' | 'mysql' | 'sqlite'
-
-const createReadlineInterface = () =>
-  createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  })
-
-const question = (prompt: string) =>
-  Effect.promise(
-    () =>
-      new Promise<string>(resolve => {
-        const rl = createReadlineInterface()
-        rl.question(prompt, answer => {
-          rl.close()
-          resolve(answer.trim())
-        })
-      })
-  )
+import { Prompt } from '@effect/cli'
 
 export const promptProjectName = (defaultName: string) =>
-  Effect.gen(function* () {
-    const input = yield* question(pc.cyan('? Project name: ') + pc.gray(`(${defaultName}) `))
-    return input || defaultName
-  })
+  Prompt.run(
+    Prompt.text({
+      message: 'Project name',
+      default: defaultName,
+    })
+  )
 
-export const promptPackageManager = (defaultManager: PackageManager) =>
-  Effect.gen(function* () {
-    const options: PackageManager[] = ['bun', 'pnpm', 'npm']
-    yield* Console.log(pc.cyan('? Package manager:'))
-    for (const option of options) {
-      const isDefault = option === defaultManager
-      const marker = isDefault ? pc.green('❯') : ' '
-      const label = isDefault ? pc.gray(' (default)') : ''
-      yield* Console.log(`${marker} ${option}${label}`)
-    }
-    const input = yield* question(pc.cyan('Enter choice: '))
-    const selected = input.toLowerCase() as PackageManager
-    return (options.includes(selected) ? selected : defaultManager) as PackageManager
-  })
+export const promptPackageManager = () =>
+  Prompt.run(
+    Prompt.select({
+      message: 'Select package manager',
+      choices: [
+        { title: 'Bun (recommended)', value: 'bun' as const },
+        { title: 'pnpm', value: 'pnpm' as const },
+        { title: 'npm', value: 'npm' as const },
+      ],
+    })
+  )
 
-export const promptDatabase = (defaultDb: Database) =>
-  Effect.gen(function* () {
-    const options: Database[] = ['postgresql', 'mysql', 'sqlite']
-    yield* Console.log(pc.cyan('? Database provider:'))
-    for (const option of options) {
-      const isDefault = option === defaultDb
-      const marker = isDefault ? pc.green('❯') : ' '
-      const label = isDefault ? pc.gray(' (default)') : ''
-      yield* Console.log(`${marker} ${option}${label}`)
-    }
-    const input = yield* question(pc.cyan('Enter choice: '))
-    const selected = input.toLowerCase() as Database
-    return (options.includes(selected) ? selected : defaultDb) as Database
-  })
+export const promptDatabase = () =>
+  Prompt.run(
+    Prompt.select({
+      message: 'Select database provider',
+      choices: [
+        { title: 'PostgreSQL (recommended)', value: 'postgresql' as const },
+        { title: 'MySQL', value: 'mysql' as const },
+        { title: 'SQLite', value: 'sqlite' as const },
+      ],
+    })
+  )
+
+export const promptAuth = () =>
+  Prompt.run(
+    Prompt.confirm({
+      message: 'Include authentication setup?',
+      initial: false,
+    })
+  )
+
+export const promptSkipInstall = () =>
+  Prompt.run(
+    Prompt.confirm({
+      message: 'Skip installing dependencies?',
+      initial: false,
+    })
+  )
+
+export const promptSkipGit = () =>
+  Prompt.run(
+    Prompt.confirm({
+      message: 'Skip git initialization?',
+      initial: false,
+    })
+  )
+
+export const promptSkipHusky = () =>
+  Prompt.run(
+    Prompt.confirm({
+      message: 'Skip git hooks setup with Husky?',
+      initial: false,
+    })
+  )

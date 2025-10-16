@@ -7,7 +7,15 @@ import { copyTemplates } from '../utils/copy-templates.js'
 import { initializeGit } from '../utils/git.js'
 import { initHusky } from '../utils/init-husky.js'
 import { installDependencies } from '../utils/install-dependencies.js'
-import { promptDatabase, promptPackageManager, promptProjectName } from '../utils/prompts.js'
+import {
+  promptAuth,
+  promptDatabase,
+  promptPackageManager,
+  promptProjectName,
+  promptSkipGit,
+  promptSkipHusky,
+  promptSkipInstall,
+} from '../utils/prompts.js'
 import { validateProjectName } from '../utils/validate.js'
 
 const PackageManagerSchema = Schema.Literal('bun', 'pnpm', 'npm')
@@ -15,12 +23,8 @@ const DatabaseSchema = Schema.Literal('postgresql', 'mysql', 'sqlite')
 
 const CreateProjectOptionsSchema = Schema.Struct({
   projectName: Schema.OptionFromSelf(Schema.String),
-  packageManager: PackageManagerSchema,
-  database: DatabaseSchema,
-  skipInstall: Schema.Boolean,
-  skipGit: Schema.Boolean,
-  skipHusky: Schema.Boolean,
-  auth: Schema.Boolean,
+  packageManager: Schema.OptionFromSelf(PackageManagerSchema),
+  database: Schema.OptionFromSelf(DatabaseSchema),
   verbose: Schema.Boolean,
   directory: Schema.OptionFromSelf(Schema.String),
 })
@@ -29,15 +33,7 @@ export type CreateProjectOptions = typeof CreateProjectOptionsSchema.Type
 
 export const createProject = (options: CreateProjectOptions) =>
   Effect.gen(function* () {
-    const {
-      packageManager: defaultPackageManager,
-      database: defaultDatabase,
-      skipInstall,
-      skipGit,
-      skipHusky,
-      auth,
-      verbose,
-    } = options
+    const { verbose } = options
     const fs = yield* FileSystem.FileSystem
 
     showBanner()
@@ -46,8 +42,21 @@ export const createProject = (options: CreateProjectOptions) =>
       ? Option.getOrThrow(options.projectName)
       : yield* promptProjectName('my-effex-app')
 
-    const packageManager = yield* promptPackageManager(defaultPackageManager)
-    const database = yield* promptDatabase(defaultDatabase)
+    const packageManager = Option.isSome(options.packageManager)
+      ? Option.getOrThrow(options.packageManager)
+      : yield* promptPackageManager()
+
+    const database = Option.isSome(options.database)
+      ? Option.getOrThrow(options.database)
+      : yield* promptDatabase()
+
+    const auth = yield* promptAuth()
+
+    const skipInstall = yield* promptSkipInstall()
+
+    const skipGit = yield* promptSkipGit()
+
+    const skipHusky = skipGit || (yield* promptSkipHusky())
 
     yield* Console.log(pc.cyan('\n✨ Creating your effex project...\n'))
 

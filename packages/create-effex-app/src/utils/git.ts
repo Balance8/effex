@@ -35,6 +35,7 @@ coverage
 .cache
 .temp
 .tmp
+packages/database/generated/
 `.trim()
 
     writeFileSync(join(normalizedPath, '.gitignore'), gitignoreContent, 'utf-8')
