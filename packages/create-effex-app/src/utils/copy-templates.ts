@@ -70,8 +70,4 @@ function copyDirectorySync(
       writeFileSync(destPath, processedContent, 'utf-8')
     }
   }
-
-  if (variables.packageManager === 'bun') {
-    writeFileSync(join(destination, 'bun.lockb'), '', 'utf-8')
-  }
 }
