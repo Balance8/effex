@@ -14,7 +14,8 @@ const _TEMPLATE_EXTENSION_REGEX = /\.template$/
 export const copyTemplates = (
   projectName: string,
   targetPath: string,
-  packageManager: PackageManager
+  packageManager: PackageManager,
+  skipHusky: boolean
 ) =>
   Effect.gen(function* () {
     const templateDir = join(__dirname, '../templates')
@@ -25,6 +26,7 @@ export const copyTemplates = (
       copyDirectorySync(templateDir, targetPath, {
         projectName,
         packageManager,
+        skipHusky,
       })
     )
   })
@@ -32,10 +34,14 @@ export const copyTemplates = (
 type TemplateVariables = {
   projectName: string
   packageManager: PackageManager
+  skipHusky: boolean
 }
 
-function shouldSkipFile(entry: string, packageManager: PackageManager): boolean {
-  if (entry === 'pnpm-workspace.yaml' && packageManager !== 'pnpm') {
+function shouldSkipFile(entry: string, variables: TemplateVariables): boolean {
+  if (entry === 'pnpm-workspace.yaml' && variables.packageManager !== 'pnpm') {
+    return true
+  }
+  if (variables.skipHusky && (entry === '.husky' || entry === 'commitlint.config.js')) {
     return true
   }
   return false
@@ -51,7 +57,7 @@ function copyDirectorySync(
   const entries = readdirSync(source)
 
   for (const entry of entries) {
-    if (shouldSkipFile(entry, variables.packageManager)) {
+    if (shouldSkipFile(entry, variables)) {
       continue
     }
 

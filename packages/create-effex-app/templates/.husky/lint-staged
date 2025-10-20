@@ -1,0 +1,7 @@
+if ! {{packageManager}} x @biomejs/biome check --write --staged --files-ignore-unknown=true --no-errors-on-unmatched; then
+  echo "❌ Biome check failed. Please fix the errors above." >&2
+  exit 1
+fi
+
+git update-index --again
+

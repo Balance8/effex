@@ -77,7 +77,7 @@ export const createProject = (options: CreateProjectOptions) =>
 
     yield* Console.log(pc.gray(`📁 Creating project at: ${projectName}`))
 
-    yield* copyTemplates(projectName, projectName, packageManager)
+    yield* copyTemplates(projectName, projectName, packageManager, skipHusky)
 
     yield* Console.log(pc.green('\n✅ Project structure created!'))
 

@@ -130,7 +130,8 @@
         "**/generated/**",
         "apps/web/next-env.d.ts",
         ".husky/**",
-        ".augment/**"
+        ".augment/**",
+        "packages/create-effex-app/templates/**"
       ],
       "linter": {
         "enabled": false

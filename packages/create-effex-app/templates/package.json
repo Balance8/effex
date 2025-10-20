@@ -1,6 +1,6 @@
 {
   "name": "{{projectName}}",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "scripts": {
     "build": "turbo run build",
@@ -12,7 +12,8 @@
     "db:seed": "turbo run db:seed",
     "db:studio": "turbo run db:studio",
     "effect:generate": "cd packages/database && bun x effex-gen@latest gen",
-    "clean": "turbo run clean"
+    "clean": "turbo run clean",
+    "{{huskyPrepareScript}}"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.2.5",
