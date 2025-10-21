@@ -4,14 +4,24 @@ const PACKAGE_MANAGER_VERSIONS = {
   npm: '11.6.2',
 } as const
 
+const PACKAGE_MANAGER_EXECUTABLES = {
+  bun: 'bun x',
+  pnpm: 'pnpx',
+  npm: 'npx',
+} as const
+
 export const replaceVariables = (content: string, variables: Record<string, string | boolean>) => {
   let result = content
 
   for (const [key, value] of Object.entries(variables)) {
     if (key === 'packageManager' && typeof value === 'string') {
       const version = PACKAGE_MANAGER_VERSIONS[value as keyof typeof PACKAGE_MANAGER_VERSIONS]
+      const executable =
+        PACKAGE_MANAGER_EXECUTABLES[value as keyof typeof PACKAGE_MANAGER_EXECUTABLES]
       const regex = new RegExp(`{{${key}}}`, 'g')
       result = result.replace(regex, `${value}@${version}`)
+      const executableRegex = /{{packageManagerExecutable}}/g
+      result = result.replace(executableRegex, executable)
     } else if (key === 'skipHusky') {
       const huskyPrepareScript = value === true ? '' : '"prepare": "husky"'
       result = result.replace(/"{{huskyPrepareScript}}"/g, huskyPrepareScript)
