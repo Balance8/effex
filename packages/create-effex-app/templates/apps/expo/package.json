@@ -25,8 +25,8 @@
     "expo-status-bar": "~3.0.8",
     "expo-system-ui": "~6.0.7",
     "nativewind": "5.0.0-preview.2",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
     "react-native": "~0.81.4",
     "react-native-css": "3.0.1",
     "react-native-gesture-handler": "~2.28.0",
@@ -39,7 +39,7 @@
   "devDependencies": {
     "@workspace/tailwind-config": "workspace:*",
     "@workspace/typescript-config": "workspace:*",
-    "@types/react": "^19.1.9",
+    "@types/react": "^19.2.2",
     "tailwindcss": "^4.1.7",
     "typescript": "^5.9.2"
   }

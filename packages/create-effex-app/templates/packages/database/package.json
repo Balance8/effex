@@ -10,7 +10,7 @@
     "db:seed": "bun scripts/seed.ts"
   },
   "devDependencies": {
-    "@types/node": "^20.19.9",
+    "@types/node": "^24.9.1",
     "drizzle-kit": "^0.31.5"
   },
   "dependencies": {
