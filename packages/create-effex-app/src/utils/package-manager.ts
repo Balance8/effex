@@ -5,9 +5,9 @@ export const getPackageManagerExecutable = (packageManager: PackageManager): str
     case 'npm':
       return 'npx'
     case 'bun':
-      return 'bunx'
+      return 'bun'
     case 'pnpm':
-      return 'pnpx'
+      return 'pnpm'
     default:
       return 'npx'
   }

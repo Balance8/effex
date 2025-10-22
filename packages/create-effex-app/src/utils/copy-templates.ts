@@ -11,6 +11,14 @@ const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 const _TEMPLATE_EXTENSION_REGEX = /\.template$/
 
+function getTemplateDir(): string {
+  const currentDir = __dirname
+  const distDir = currentDir.includes('dist')
+    ? `${currentDir.split('dist')[0]}dist`
+    : dirname(dirname(__dirname))
+  return join(distDir, 'templates')
+}
+
 export const copyTemplates = (
   projectName: string,
   targetPath: string,
@@ -18,7 +26,7 @@ export const copyTemplates = (
   skipHusky: boolean
 ) =>
   Effect.gen(function* () {
-    const templateDir = join(__dirname, '../templates')
+    const templateDir = getTemplateDir()
 
     yield* Console.log(pc.gray('📋 Copying template files...'))
 

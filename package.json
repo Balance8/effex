@@ -7,6 +7,7 @@
     "build": "cd packages/create-effex-app; bun run build",
     "format-and-lint": "biome check .",
     "format-and-lint:fix": "biome check . --write --unsafe",
+    "clean": "git clean -fdx -e '.env*' && bun install",
     "prepare": "husky"
   },
   "devDependencies": {

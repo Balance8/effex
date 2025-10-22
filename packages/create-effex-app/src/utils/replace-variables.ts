@@ -10,6 +10,12 @@ const PACKAGE_MANAGER_EXECUTABLES = {
   npm: 'npx',
 } as const
 
+const _PACKAGE_MANAGER_INSTALL = {
+  bun: 'bun install',
+  pnpm: 'pnpm install',
+  npm: 'npm install',
+} as const
+
 export const replaceVariables = (content: string, variables: Record<string, string | boolean>) => {
   let result = content
 
@@ -18,10 +24,13 @@ export const replaceVariables = (content: string, variables: Record<string, stri
       const version = PACKAGE_MANAGER_VERSIONS[value as keyof typeof PACKAGE_MANAGER_VERSIONS]
       const executable =
         PACKAGE_MANAGER_EXECUTABLES[value as keyof typeof PACKAGE_MANAGER_EXECUTABLES]
+      const install = _PACKAGE_MANAGER_INSTALL[value as keyof typeof _PACKAGE_MANAGER_INSTALL]
       const regex = new RegExp(`{{${key}}}`, 'g')
       result = result.replace(regex, `${value}@${version}`)
       const executableRegex = /{{packageManagerExecutable}}/g
       result = result.replace(executableRegex, executable)
+      const installRegex = /{{packageManagerInstall}}/g
+      result = result.replace(installRegex, install)
     } else if (key === 'skipHusky') {
       const huskyPrepareScript = value === true ? '' : '"prepare": "husky"'
       result = result.replace(/"{{huskyPrepareScript}}"/g, huskyPrepareScript)

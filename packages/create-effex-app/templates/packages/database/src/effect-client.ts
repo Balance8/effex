@@ -7,6 +7,7 @@ import * as schema from './schema'
 
 const MAX_CONNECTIONS_DEV = 1
 const MAX_CONNECTIONS_PROD = 8
+const MS_TO_SECONDS = 1000
 
 const maxConnections =
   process.env.NODE_ENV === 'development' ? MAX_CONNECTIONS_DEV : MAX_CONNECTIONS_PROD
@@ -27,8 +28,8 @@ export class DrizzleService extends Effect.Service<DrizzleService>()('DrizzleSer
 
     const client = postgres(url, {
       max: maxConnections,
-      idle_timeout: timeoutMs / 1000,
-      connect_timeout: timeoutMs / 1000,
+      idle_timeout: timeoutMs / MS_TO_SECONDS,
+      connect_timeout: timeoutMs / MS_TO_SECONDS,
     })
 
     const db = drizzle(client, { schema, casing: 'snake_case' })

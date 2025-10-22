@@ -14,7 +14,7 @@ export default function RootLayout() {
             backgroundColor: "#c03484",
           },
           contentStyle: {
-            backgroundColor: colorScheme == "dark" ? "#09090B" : "#FFFFFF",
+            backgroundColor: colorScheme === "dark" ? "#09090B" : "#FFFFFF",
           },
         }}
       />
@@ -22,4 +22,3 @@ export default function RootLayout() {
     </>
   );
 }
-

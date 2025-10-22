@@ -6,22 +6,22 @@ export default function Index() {
   return (
     <SafeAreaView className="bg-background">
       <Stack.Screen options={{ title: "Home Page" }} />
-      <View className="bg-background h-full w-full p-4">
-        <Text className="text-foreground pb-2 text-center text-5xl font-bold">
+      <View className="h-full w-full bg-background p-4">
+        <Text className="pb-2 text-center font-bold text-5xl text-foreground">
           Create <Text className="text-primary">Effex</Text> App
         </Text>
 
         <View className="py-4">
-          <Text className="text-foreground text-center text-lg">
+          <Text className="text-center text-foreground text-lg">
             Welcome to your Expo app with NativeWind v5!
           </Text>
         </View>
 
-        <View className="bg-card rounded-lg p-4">
-          <Text className="text-card-foreground text-xl font-semibold">
+        <View className="rounded-lg bg-card p-4">
+          <Text className="font-semibold text-card-foreground text-xl">
             Getting Started
           </Text>
-          <Text className="text-muted-foreground mt-2">
+          <Text className="mt-2 text-muted-foreground">
             Edit apps/expo/src/app/index.tsx to get started.
           </Text>
         </View>
@@ -29,4 +29,3 @@ export default function Index() {
     </SafeAreaView>
   );
 }
-

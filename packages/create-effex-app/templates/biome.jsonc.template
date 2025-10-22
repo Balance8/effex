@@ -94,13 +94,24 @@
         "**/src/generated/**",
         "**/generated/**",
         "apps/web/next-env.d.ts",
-        ".husky/**"
+        ".husky/**",
+        "commitlint.config.{mjs,js}"
       ],
       "linter": {
         "enabled": false
       },
       "formatter": {
         "enabled": false
+      }
+    },
+    {
+      "includes": ["**/theme.css"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noDuplicateCustomProperties": "off"
+          }
+        }
       }
     }
   ],

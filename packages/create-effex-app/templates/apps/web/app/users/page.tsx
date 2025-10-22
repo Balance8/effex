@@ -17,7 +17,7 @@ export default async function UsersPage() {
           console.error('Failed to load users:', error)
           return { success: false as const, error: 'Failed to load users' }
         },
-        onSuccess: users => ({ success: true as const, data: users }),
+        onSuccess: userList => ({ success: true as const, data: userList }),
       })
     )
   )
