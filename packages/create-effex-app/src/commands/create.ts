@@ -27,36 +27,52 @@ const CreateProjectOptionsSchema = Schema.Struct({
   database: Schema.OptionFromSelf(DatabaseSchema),
   verbose: Schema.Boolean,
   directory: Schema.OptionFromSelf(Schema.String),
+  all: Schema.Boolean,
 })
 
 export type CreateProjectOptions = typeof CreateProjectOptionsSchema.Type
 
 export const createProject = (options: CreateProjectOptions) =>
   Effect.gen(function* () {
-    const { verbose } = options
+    const { verbose, all } = options
     const fs = yield* FileSystem.FileSystem
 
     showBanner()
 
-    const projectName = Option.isSome(options.projectName)
-      ? Option.getOrThrow(options.projectName)
-      : yield* promptProjectName('my-effex-app')
+    let projectName: string
+    if (Option.isSome(options.projectName)) {
+      projectName = Option.getOrThrow(options.projectName)
+    } else if (all) {
+      projectName = 'my-effex-app'
+    } else {
+      projectName = yield* promptProjectName('my-effex-app')
+    }
 
-    const packageManager = Option.isSome(options.packageManager)
-      ? Option.getOrThrow(options.packageManager)
-      : yield* promptPackageManager()
+    let packageManager: 'bun' | 'pnpm' | 'npm'
+    if (Option.isSome(options.packageManager)) {
+      packageManager = Option.getOrThrow(options.packageManager)
+    } else if (all) {
+      packageManager = 'bun'
+    } else {
+      packageManager = yield* promptPackageManager()
+    }
 
-    const database = Option.isSome(options.database)
-      ? Option.getOrThrow(options.database)
-      : yield* promptDatabase()
+    let database: 'postgresql' | 'mysql' | 'sqlite'
+    if (Option.isSome(options.database)) {
+      database = Option.getOrThrow(options.database)
+    } else if (all) {
+      database = 'postgresql'
+    } else {
+      database = yield* promptDatabase()
+    }
 
-    const auth = yield* promptAuth()
+    const auth = all ? false : yield* promptAuth()
 
-    const skipInstall = yield* promptSkipInstall()
+    const skipInstall = all ? false : yield* promptSkipInstall()
 
-    const skipGit = yield* promptSkipGit()
+    const skipGit = all ? false : yield* promptSkipGit()
 
-    const skipHusky = skipGit || (yield* promptSkipHusky())
+    const skipHusky = all ? false : skipGit || (yield* promptSkipHusky())
 
     yield* Console.log(pc.cyan('\n✨ Creating your effex project...\n'))
 

@@ -26,6 +26,12 @@ const directoryOption = Options.text('directory').pipe(
   Options.withDescription('Custom directory to create the project in')
 )
 
+const allOption = Options.boolean('all').pipe(
+  Options.withAlias('a'),
+  Options.withDefault(false),
+  Options.withDescription('Accept all defaults without prompts')
+)
+
 const createCommand = Command.make(
   'create-effex-app',
   {
@@ -34,6 +40,7 @@ const createCommand = Command.make(
     database: databaseOption,
     verbose: verboseOption,
     directory: directoryOption,
+    all: allOption,
   },
   options => createProject(options)
 )

@@ -20,6 +20,13 @@ With options:
 npm create-effex-app my-app --package-manager bun --database postgresql
 ```
 
+Accept all defaults without prompts:
+
+```bash
+npm create-effex-app my-app -a
+npm create-effex-app my-app --all
+```
+
 ## What You Get
 
 A modern full-stack monorepo with:
@@ -32,6 +39,7 @@ A modern full-stack monorepo with:
 
 ## Options
 
+- `-a, --all` - Accept all defaults without prompts (uses bun, postgresql, no auth)
 - `--package-manager <bun|pnpm|npm>` - Package manager to use (default: bun)
 - `--database <postgresql|mysql|sqlite>` - Database provider (default: postgresql)
 - `--skip-install` - Skip dependency installation

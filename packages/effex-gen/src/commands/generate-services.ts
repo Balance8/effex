@@ -8,6 +8,7 @@ import { generateEffectServices } from '../generators/prisma-service-generator.j
 const GenerateServicesOptionsSchema = Schema.Struct({
   schemaPath: Schema.OptionFromSelf(Schema.String),
   outputDir: Schema.OptionFromSelf(Schema.String),
+  all: Schema.OptionFromSelf(Schema.Boolean),
 })
 
 export type GenerateServicesOptions = typeof GenerateServicesOptionsSchema.Type

@@ -4,12 +4,20 @@ CLI tool for generating type-safe Effect-TS services from Prisma or Drizzle sche
 
 ## Usage
 
-### Drizzle (Recommended)
+### Drizzle (Default)
 
 Generate Effect schemas and services from your Drizzle schema:
 
 ```bash
+# Run with defaults (Drizzle is the default generator)
+effex-gen
+
+# Or explicitly specify drizzle
 effex-gen drizzle
+
+# Accept all defaults without prompts
+effex-gen -a
+effex-gen --all
 ```
 
 ### Prisma
@@ -21,6 +29,10 @@ effex-gen prisma
 ```
 
 ## Options
+
+### Global Options
+
+- `-a, --all` - Accept all defaults without prompts (works with both Drizzle and Prisma)
 
 ### Drizzle Options
 

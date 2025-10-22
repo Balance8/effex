@@ -10,6 +10,7 @@ const GenerateDrizzleOptionsSchema = Schema.Struct({
   schemaPath: Schema.OptionFromSelf(Schema.String),
   outputDir: Schema.OptionFromSelf(Schema.String),
   servicesDir: Schema.OptionFromSelf(Schema.String),
+  all: Schema.OptionFromSelf(Schema.Boolean),
 })
 
 export type GenerateDrizzleOptions = typeof GenerateDrizzleOptionsSchema.Type

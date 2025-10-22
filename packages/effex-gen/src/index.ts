@@ -12,22 +12,18 @@ const schemaPathOption = Options.text('schema-path').pipe(
 
 const outputDirOption = Options.text('output-dir').pipe(
   Options.optional,
+  Options.withDescription('Output directory for generated schemas')
+)
+
+const servicesDirOption = Options.text('services-dir').pipe(
+  Options.optional,
   Options.withDescription('Output directory for generated services')
 )
 
-const apiDirOption = Options.text('api-dir').pipe(
+const allOption = Options.boolean('all').pipe(
+  Options.withAlias('a'),
   Options.optional,
-  Options.withDescription('Output directory for generated API routers')
-)
-
-const drizzleCommand = Command.make(
-  'drizzle',
-  {
-    schemaPath: schemaPathOption,
-    outputDir: outputDirOption,
-    apiDir: apiDirOption,
-  },
-  options => generateDrizzle(options)
+  Options.withDescription('Accept all defaults without prompts')
 )
 
 const prismaCommand = Command.make(
@@ -35,13 +31,21 @@ const prismaCommand = Command.make(
   {
     schemaPath: schemaPathOption,
     outputDir: outputDirOption,
+    all: allOption,
   },
   options => generateServices(options)
 )
 
-const mainCommand = Command.make('effex-gen').pipe(
-  Command.withSubcommands([drizzleCommand, prismaCommand])
-)
+const mainCommand = Command.make(
+  'effex-gen',
+  {
+    schemaPath: schemaPathOption,
+    outputDir: outputDirOption,
+    servicesDir: servicesDirOption,
+    all: allOption,
+  },
+  options => generateDrizzle(options)
+).pipe(Command.withSubcommands([prismaCommand]))
 
 const cli = Command.run(mainCommand, {
   name: 'effex-gen',
