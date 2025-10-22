@@ -24,23 +24,23 @@
   },
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./src/index.ts",
       "default": "./src/index.ts"
     },
     "./client": {
-      "types": "./dist/effect-client.d.ts",
+      "types": "./src/effect-client.ts",
       "default": "./src/effect-client.ts"
     },
     "./schema": {
-      "types": "./dist/schema.d.ts",
+      "types": "./src/schema.ts",
       "default": "./src/schema.ts"
     },
     "./effect/schemas/*": {
-      "types": "./src/generated/effect/schemas/*.d.ts",
+      "types": "./src/generated/effect/schemas/*.ts",
       "default": "./src/generated/effect/schemas/*.ts"
     },
     "./effect/services/*": {
-      "types": "./src/generated/effect/services/*.d.ts",
+      "types": "./src/generated/effect/services/*.ts",
       "default": "./src/generated/effect/services/*.ts"
     }
   }

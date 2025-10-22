@@ -19,7 +19,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@effect/sql-drizzle": "^0.45.0",
     "@workspace/database": "workspace:*",
+    "drizzle-orm": "^0.44.6",
     "effect": "^3.17.14"
   },
   "devDependencies": {
