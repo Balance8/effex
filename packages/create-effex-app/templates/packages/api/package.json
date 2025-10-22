@@ -6,10 +6,6 @@
     ".": {
       "types": "./dist/index.d.ts",
       "default": "./src/index.ts"
-    },
-    "./router/*": {
-      "types": "./dist/router/*.d.ts",
-      "default": "./src/router/*.ts"
     }
   },
   "scripts": {
