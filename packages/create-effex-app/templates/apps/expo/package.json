@@ -13,7 +13,9 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@workspace/api": "workspace:*",
     "@workspace/database": "workspace:*",
+    "@workspace/ui": "workspace:*",
     "expo": "~54.0.13",
     "expo-constants": "~18.0.9",
     "expo-dev-client": "~6.0.15",
