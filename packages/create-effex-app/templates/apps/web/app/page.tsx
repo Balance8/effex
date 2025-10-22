@@ -6,8 +6,7 @@ export default function Home() {
   return (
     <main className='flex min-h-screen flex-col items-center justify-center p-24'>
       <div className='z-10 w-full max-w-5xl items-center justify-between font-mono text-sm'>
-        {/* biome-ignore lint/correctness/noUndeclaredVariables: template variable */}
-        <h1 className='mb-4 font-bold text-4xl'>Welcome to {{ projectName }}</h1>
+        <h1 className='mb-4 font-bold text-4xl'>Welcome to {{projectName}}</h1>
         <p className='mb-8 text-lg'>Your project has been successfully created with effex!</p>
         <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
           <LinkCard
