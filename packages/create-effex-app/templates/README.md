@@ -3,7 +3,9 @@
 A modern full-stack application built with:
 
 - **Turbo Repo** - Monorepo build system
-- **Next.js** - React framework
+- **Next.js** - React framework for web
+- **Expo** - React Native framework for mobile (iOS/Android)
+- **NativeWind v5** - Tailwind CSS v4 for React Native
 - **Prisma** - Database ORM
 - **Effect-TS** - Functional programming library
 - **Biome** - Fast formatter and linter with Ultracite rules
@@ -55,13 +57,25 @@ cp apps/web/.env.example apps/web/.env
 
 ### Development
 
-Start the development server:
+Start all development servers:
 
 ```bash
 {{packageManager}} run dev
 ```
 
-The app will be available at [http://localhost:3000](http://localhost:3000).
+Or start individual apps:
+
+```bash
+# Web app only
+{{packageManager}} run dev:web
+
+# Expo app only
+{{packageManager}} run dev:expo
+```
+
+The web app will be available at [http://localhost:3000](http://localhost:3000).
+
+For the Expo app, see [apps/expo/README.md](apps/expo/README.md) for mobile development instructions.
 
 ## Working with Effect Services
 
@@ -85,9 +99,11 @@ When you modify your Prisma schema, regenerate the services by running `{{packag
 ```
 {{projectName}}/
 ├── apps/
-│   └── web/              # Next.js application
+│   ├── web/              # Next.js application
+│   └── expo/             # Expo React Native app
 ├── packages/
 │   ├── database/         # Prisma schema and database utilities
+│   ├── tailwind-config/  # Shared Tailwind CSS theme
 │   ├── typescript-config/# Shared TypeScript configurations
 │   └── ui/              # Shared UI components
 ├── biome.jsonc          # Biome configuration
@@ -97,9 +113,11 @@ When you modify your Prisma schema, regenerate the services by running `{{packag
 
 ## Available Scripts
 
-### Development
+### Build & Development
 
-- `{{packageManager}} run dev` - Start development server
+- `{{packageManager}} run dev` - Start all development servers
+- `{{packageManager}} run dev:web` - Start web app only
+- `{{packageManager}} run dev:expo` - Start Expo app only
 - `{{packageManager}} run build` - Build all packages
 
 ### Code Quality
@@ -121,6 +139,8 @@ When you modify your Prisma schema, regenerate the services by running `{{packag
 ## Learn More
 
 - [Next.js Documentation](https://nextjs.org/docs)
+- [Expo Documentation](https://docs.expo.dev)
+- [NativeWind Documentation](https://www.nativewind.dev)
 - [Prisma Documentation](https://www.prisma.io/docs)
 - [Effect Documentation](https://effect.website)
 - [Turbo Documentation](https://turbo.build/repo/docs)

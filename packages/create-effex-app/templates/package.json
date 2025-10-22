@@ -5,6 +5,8 @@
   "scripts": {
     "build": "turbo run build",
     "dev": "turbo run dev",
+    "dev:web": "turbo run dev --filter=web",
+    "dev:expo": "turbo run dev --filter=expo",
     "format-and-lint": "biome check .",
     "format-and-lint:fix": "biome check . --write --unsafe",
     "db:generate": "turbo run db:generate",

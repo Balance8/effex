@@ -1,0 +1,4 @@
+@import "tailwindcss";
+@import "nativewind/theme";
+@import "@workspace/tailwind-config/theme";
+

@@ -1,0 +1,16 @@
+{
+  "name": "@workspace/tailwind-config",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./theme": "./theme.css",
+    "./postcss-config": "./postcss-config.js"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.7",
+    "postcss": "^8.5.6",
+    "tailwindcss": "^4.1.7"
+  }
+}
+

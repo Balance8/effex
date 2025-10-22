@@ -38,3 +38,12 @@ next-env.d.ts
 # Prisma
 packages/database/generated/prisma/
 
+# Expo
+.expo/
+apps/expo/.expo/
+apps/expo/android/
+apps/expo/ios/
+expo-env.d.ts
+
+# Metro
+.cache/
