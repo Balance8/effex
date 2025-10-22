@@ -4,7 +4,7 @@
   "private": true,
   "description": "Monorepo for create-effex-app - A CLI tool to scaffold modern full-stack apps",
   "scripts": {
-    "build": "cd packages/create-effex-app && bun run build",
+    "build": "cd packages/create-effex-app; bun run build",
     "format-and-lint": "biome check .",
     "format-and-lint:fix": "biome check . --write --unsafe",
     "prepare": "husky"
@@ -17,7 +17,6 @@
     "@types/bun": "^1.1.14",
     "@types/node": "^20.19.9",
     "husky": "^9.1.7",
-    "tsup": "^8.3.5",
     "typescript": "^5.9.2",
     "ultracite": "5.6.2"
   },

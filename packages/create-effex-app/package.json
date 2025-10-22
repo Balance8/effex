@@ -1,18 +1,17 @@
 {
   "name": "create-effex-app",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "description": "Create a new Effex app with a single command",
   "type": "module",
   "bin": {
     "create-effex-app": "./dist/index.js"
   },
   "files": [
-    "dist",
-    "templates"
+    "dist"
   ],
   "scripts": {
-    "build": "tsup",
-    "dev": "tsup --watch",
+    "build": "bun run build.ts",
+    "dev": "bun run --watch build.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
@@ -25,7 +24,6 @@
   },
   "devDependencies": {
     "@types/node": "^20.19.9",
-    "tsup": "^8.3.5",
     "typescript": "^5.9.2"
   },
   "engines": {
