@@ -3,7 +3,7 @@ import { resolve } from 'node:path'
 import { Console, Effect, Option, Schema } from 'effect'
 import pc from 'picocolors'
 
-import { generateEffectServices } from '../generators/effect-service-generator.js'
+import { generateEffectServices } from '../generators/prisma-service-generator.js'
 
 const GenerateServicesOptionsSchema = Schema.Struct({
   schemaPath: Schema.OptionFromSelf(Schema.String),

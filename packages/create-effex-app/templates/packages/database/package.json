@@ -1,34 +1,47 @@
 {
   "name": "@workspace/database",
   "version": "0.0.0",
+  "type": "module",
   "scripts": {
-    "db:generate": "bun x prisma generate && npm run effect:generate",
-    "db:format": "bun x prisma format",
-    "db:seed": "bun x prisma db seed",
-    "db:migrate": "bun x prisma migrate deploy",
-    "db:push": "bun x prisma db push",
-    "db:studio": "bun x prisma studio",
-    "effect:generate": "bun x effex-gen@latest gen"
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:push": "drizzle-kit push",
+    "db:studio": "drizzle-kit studio",
+    "db:seed": "bun scripts/seed.ts"
   },
   "devDependencies": {
     "@types/node": "^20.19.9",
-    "prisma": "^6.16.1"
+    "drizzle-kit": "^0.31.5"
   },
   "dependencies": {
     "@effect/platform": "^0.91.1",
     "@effect/schema": "^0.75.5",
     "@effect/sql": "^0.45.0",
     "@effect/sql-pg": "^0.46.0",
-    "@prisma/client": "^6.16.1",
-    "effect": "^3.17.14"
+    "drizzle-orm": "^0.44.6",
+    "effect": "^3.17.14",
+    "postgres": "^3.4.5"
   },
   "exports": {
-    "./effect/client": "./src/effect-client.ts",
-    "./effect/schemas/*": "./src/generated/effect/schemas/*.ts",
-    "./effect/services/*": "./src/generated/effect/services/*.ts",
-    "./prisma": "./generated/prisma/index.js"
-  },
-  "prisma": {
-    "seed": "npx tsx scripts/seed.ts"
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./src/index.ts"
+    },
+    "./client": {
+      "types": "./dist/effect-client.d.ts",
+      "default": "./src/effect-client.ts"
+    },
+    "./schema": {
+      "types": "./dist/schema.d.ts",
+      "default": "./src/schema.ts"
+    },
+    "./effect/schemas/*": {
+      "types": "./src/generated/effect/schemas/*.d.ts",
+      "default": "./src/generated/effect/schemas/*.ts"
+    },
+    "./effect/services/*": {
+      "types": "./src/generated/effect/services/*.d.ts",
+      "default": "./src/generated/effect/services/*.ts"
+    }
   }
 }
