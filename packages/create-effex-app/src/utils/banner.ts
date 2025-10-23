@@ -34,6 +34,13 @@ ${pc.bold('Next steps:')}
 
 ${pc.dim('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')}
 
+${pc.bold('Quick Database Setup:')}
+
+  ${pc.cyan(`${packageManager} run db:dev`)}      ${pc.dim('Start local Prisma Postgres (instant setup!)')}
+  ${pc.dim('  Then copy the connection string to .env')}
+
+${pc.dim('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━')}
+
 ${pc.bold('Available commands:')}
 
   ${pc.cyan(`${packageManager} run dev`)}        ${pc.dim('Start development server')}

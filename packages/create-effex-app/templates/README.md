@@ -27,12 +27,47 @@ Dependencies should already be installed. If not, run:
 
 ### Database Setup
 
-**Important:** You must generate the Prisma client before running the app.
+#### Quick Start (Recommended)
+
+The fastest way to get started is using Prisma's built-in local database:
+
+1. Start a local Prisma Postgres instance:
+
+```bash
+{{packageManager}} run db:dev
+```
+
+2. Copy the connection string from the output to `.env`:
+
+```bash
+cp .env.example .env
+```
+
+Then paste the connection string:
+```env
+DATABASE_URL="postgres://user:pass@localhost:5432/dbname"
+```
+
+3. Push schema to database:
+
+```bash
+{{packageManager}} run db:push
+```
+
+4. (Optional) Seed the database:
+
+```bash
+{{packageManager}} run db:seed
+```
+
+#### Using External PostgreSQL
+
+If you prefer to use your own PostgreSQL database:
 
 1. Copy `.env.example` to `.env` and configure your database URL:
 
 ```bash
-cp apps/web/.env.example apps/web/.env
+cp .env.example .env
 ```
 
 2. Generate Prisma client:
@@ -43,7 +78,7 @@ cp apps/web/.env.example apps/web/.env
 
 > **Note:** This generates both the Prisma client and Effect-TS services from your schema.
 
-1. Run database migrations:
+3. Run database migrations:
 
 ```bash
 {{packageManager}} run db:migrate
@@ -127,8 +162,10 @@ When you modify your Prisma schema, regenerate the services by running `{{packag
 
 ### Database
 
+- `{{packageManager}} run db:dev` - Start local Prisma Postgres instance
 - `{{packageManager}} run db:generate` - Generate Prisma client and Effect services
 - `{{packageManager}} run db:migrate` - Run database migrations
+- `{{packageManager}} run db:push` - Push schema to database
 - `{{packageManager}} run db:seed` - Seed the database
 - `{{packageManager}} run db:studio` - Open Prisma Studio
 
