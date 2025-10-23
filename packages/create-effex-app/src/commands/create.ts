@@ -4,6 +4,7 @@ import pc from 'picocolors'
 
 import { showBanner, showSuccess } from '../utils/banner.js'
 import { copyTemplates } from '../utils/copy-templates.js'
+import { generateDatabase } from '../utils/generate-database.js'
 import { initializeGit } from '../utils/git.js'
 import { installDependencies } from '../utils/install-dependencies.js'
 import {
@@ -106,6 +107,10 @@ export const createProject = (options: CreateProjectOptions) =>
       yield* Console.log(pc.cyan('\n📦 Installing dependencies...\n'))
       yield* installDependencies(projectName, packageManager)
       yield* Console.log(pc.green('\n✅ Dependencies installed!'))
+
+      yield* Console.log(pc.cyan('\n🔄 Generating database schemas...\n'))
+      yield* generateDatabase(projectName, packageManager)
+      yield* Console.log(pc.green('\n✅ Database schemas generated!'))
     }
 
     showSuccess(projectName, packageManager, skipInstall)

@@ -1,4 +1,5 @@
 import { ArrowRightIcon } from 'lucide-react'
+import Link from 'next/link'
 
 import { Card, CardDescription, CardHeader, CardTitle } from '@workspace/ui/components/card'
 
@@ -8,6 +9,21 @@ export default function Home() {
       <div className='z-10 w-full max-w-5xl items-center justify-between font-mono text-sm'>
         <h1 className='mb-4 font-bold text-4xl'>Welcome to {{projectName}}</h1>
         <p className='mb-8 text-lg'>Your project has been successfully created with effex!</p>
+
+        <div className='mb-8 grid gap-4 md:grid-cols-2'>
+          <InternalLinkCard
+            description='View all users in the database'
+            href='/users'
+            title='Users'
+          />
+          <InternalLinkCard
+            description='View all posts in the database'
+            href='/posts'
+            title='Posts'
+          />
+        </div>
+
+        <h2 className='mb-4 font-bold text-2xl'>Tech Stack</h2>
         <div className='grid gap-4 md:grid-cols-2 lg:grid-cols-3'>
           <LinkCard
             description='The React Framework for the Web'
@@ -42,6 +58,33 @@ export default function Home() {
         </div>
       </div>
     </main>
+  )
+}
+
+function InternalLinkCard({
+  title,
+  description,
+  href,
+}: {
+  title: string
+  description: string
+  href: string
+}) {
+  return (
+    <Link
+      className='group transition-transform hover:scale-[1.02]'
+      href={href}
+    >
+      <Card className='h-full transition-colors hover:border-primary/50'>
+        <CardHeader>
+          <CardTitle className='flex items-center justify-between'>
+            {title}
+            <ArrowRightIcon className='size-4 transition-transform group-hover:translate-x-1' />
+          </CardTitle>
+          <CardDescription>{description}</CardDescription>
+        </CardHeader>
+      </Card>
+    </Link>
   )
 }
 

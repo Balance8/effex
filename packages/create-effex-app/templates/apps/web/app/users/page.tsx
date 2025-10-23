@@ -1,4 +1,4 @@
-import { Effect, Match } from 'effect'
+import { Effect } from 'effect'
 
 import { RuntimeServer, UsersService } from '@workspace/api'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@workspace/ui/components/card'

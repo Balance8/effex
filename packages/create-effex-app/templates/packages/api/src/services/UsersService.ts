@@ -4,9 +4,9 @@ import * as PgDrizzle from '@effect/sql-drizzle/Pg'
 import { eq } from 'drizzle-orm'
 import { Context, Effect, Layer, Schema } from 'effect'
 
-import type { InsertUser } from '@workspace/database/effect/schemas/user-schemas'
-import { selectUserSchema } from '@workspace/database/effect/schemas/user-schemas'
-import { user } from '@workspace/database/schema'
+import { User } from '@workspace/database/drizzle/schema'
+import { selectUserSchema } from '@workspace/database/effect/user-schemas'
+import type { InsertUser } from '@workspace/database/effect/user-types'
 
 export class DatabaseError extends Schema.TaggedError<DatabaseError>()('DatabaseError', {
   cause: Schema.Unknown,
@@ -22,7 +22,7 @@ const makeUsersService = Effect.gen(function* () {
   return {
     getAllUsers: drizzle
       .select()
-      .from(user)
+      .from(User)
       .pipe(
         Effect.mapError(error => new DatabaseError({ cause: error })),
         Effect.flatMap(users =>
@@ -33,8 +33,8 @@ const makeUsersService = Effect.gen(function* () {
     getUserById: (id: string) =>
       drizzle
         .select()
-        .from(user)
-        .where(eq(user.id, id))
+        .from(User)
+        .where(eq(User.id, id))
         .limit(1)
         .pipe(
           Effect.mapError(error => new DatabaseError({ cause: error })),
@@ -46,7 +46,7 @@ const makeUsersService = Effect.gen(function* () {
 
     createUser: (data: InsertUser) =>
       drizzle
-        .insert(user)
+        .insert(User)
         .values(data)
         .returning()
         .pipe(
@@ -63,8 +63,8 @@ const makeUsersService = Effect.gen(function* () {
       Effect.gen(function* () {
         const existingUser = yield* drizzle
           .select()
-          .from(user)
-          .where(eq(user.id, id))
+          .from(User)
+          .where(eq(User.id, id))
           .limit(1)
           .pipe(
             Effect.mapError(error => new DatabaseError({ cause: error })),
@@ -74,9 +74,9 @@ const makeUsersService = Effect.gen(function* () {
           )
 
         const [updatedUser] = yield* drizzle
-          .update(user)
+          .update(User)
           .set({ ...data, updatedAt: new Date() })
-          .where(eq(user.id, id))
+          .where(eq(User.id, id))
           .returning()
           .pipe(
             Effect.mapError(error => new DatabaseError({ cause: error })),
@@ -92,8 +92,8 @@ const makeUsersService = Effect.gen(function* () {
       Effect.gen(function* () {
         const existingUser = yield* drizzle
           .select()
-          .from(user)
-          .where(eq(user.id, id))
+          .from(User)
+          .where(eq(User.id, id))
           .limit(1)
           .pipe(
             Effect.mapError(error => new DatabaseError({ cause: error })),
@@ -103,8 +103,8 @@ const makeUsersService = Effect.gen(function* () {
           )
 
         yield* drizzle
-          .delete(user)
-          .where(eq(user.id, id))
+          .delete(User)
+          .where(eq(User.id, id))
           .pipe(Effect.mapError(error => new DatabaseError({ cause: error })))
 
         return yield* Schema.decodeUnknown(selectUserSchema)(existingUser)

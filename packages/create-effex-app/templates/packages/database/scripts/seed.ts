@@ -1,37 +1,50 @@
-import { drizzle } from 'drizzle-orm/postgres-js'
-import postgres from 'postgres'
-
-import { user } from '../src/schema'
-
-const databaseUrl = process.env.DATABASE_URL
-
-if (!databaseUrl) {
-  throw new Error('DATABASE_URL environment variable is not set')
-}
-
-const client = postgres(databaseUrl)
-const db = drizzle(client, { casing: 'snake_case' })
+import { db, pool } from '../src/drizzle-client'
+import { Post, User } from '../src/generated/drizzle/schema'
 
 async function main() {
   console.log('🌱 Seeding database...')
 
-  const [newUser] = await db
-    .insert(user)
-    .values({
-      email: 'user@example.com',
-      name: 'Example User',
-    })
-    .returning()
+  const users = await db.insert(User).values([
+    {
+      email: 'alice@example.com',
+      name: 'Alice',
+    },
+    {
+      email: 'bob@example.com',
+      name: 'Bob',
+    },
+  ]).returning()
 
-  console.log('✅ Created user:', newUser)
-  console.log('🎉 Seeding complete!')
+  await db.insert(Post).values([
+    {
+      title: 'First Post',
+      content: 'This is Alice\'s first post',
+      published: true,
+      authorId: users[0].id,
+    },
+    {
+      title: 'Draft Post',
+      content: 'This is a draft',
+      published: false,
+      authorId: users[0].id,
+    },
+    {
+      title: 'Bob\'s Post',
+      content: 'Hello from Bob',
+      published: true,
+      authorId: users[1].id,
+    },
+  ])
+
+  console.log('✅ Database seeded successfully')
 }
 
 main()
-  .catch(e => {
-    console.error('❌ Seeding failed:', e)
+  .catch(error => {
+    console.error('❌ Error seeding database:', error)
     process.exit(1)
   })
   .finally(async () => {
-    await client.end()
+    await pool.end()
+    process.exit(0)
   })

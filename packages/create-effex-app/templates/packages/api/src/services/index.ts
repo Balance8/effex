@@ -1,4 +1,6 @@
 // biome-ignore lint/performance/noBarrelFile: Services entry point
+
+export { PostNotFound, PostsService } from './PostsService'
 export { RuntimeServer } from './RuntimeServer'
 export { DatabaseError, UserNotFound, UsersService } from './UsersService'
 

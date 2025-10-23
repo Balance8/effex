@@ -1,4 +1,3 @@
-// biome-ignore lint/performance/noBarrelFile: Re-exporting drizzle utilities
-export { alias } from "drizzle-orm/pg-core"
-export * from "drizzle-orm/sql"
+export * from './drizzle-client'
+export * from './effect-client'
 
