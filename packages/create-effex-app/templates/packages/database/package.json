@@ -27,6 +27,7 @@
     "@effect/schema": "^0.75.5",
     "@effect/sql": "^0.45.0",
     "@effect/sql-drizzle": "^0.45.0",
+    "@effect/sql-pg": "^0.47.0",
     "@handfish/drizzle-effect": "^0.0.17",
     "@prisma/client": "^6.2.1",
     "drizzle-orm": "^0.44.6",
