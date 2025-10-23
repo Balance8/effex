@@ -5,7 +5,6 @@ import pc from 'picocolors'
 import { showBanner, showSuccess } from '../utils/banner.js'
 import { copyTemplates } from '../utils/copy-templates.js'
 import { initializeGit } from '../utils/git.js'
-import { initHusky } from '../utils/init-husky.js'
 import { installDependencies } from '../utils/install-dependencies.js'
 import {
   promptAuth,
@@ -107,12 +106,6 @@ export const createProject = (options: CreateProjectOptions) =>
       yield* Console.log(pc.cyan('\n📦 Installing dependencies...\n'))
       yield* installDependencies(projectName, packageManager)
       yield* Console.log(pc.green('\n✅ Dependencies installed!'))
-
-      if (!(skipGit || skipHusky)) {
-        yield* Console.log(pc.gray('\n🪝 Setting up git hooks...'))
-        yield* initHusky(projectName, packageManager)
-        yield* Console.log(pc.green('✅ Git hooks configured!'))
-      }
     }
 
     showSuccess(projectName, packageManager, skipInstall)

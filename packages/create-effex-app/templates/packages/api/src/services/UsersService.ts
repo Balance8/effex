@@ -1,3 +1,5 @@
+import 'server-only'
+
 import * as PgDrizzle from '@effect/sql-drizzle/Pg'
 import { eq } from 'drizzle-orm'
 import { Context, Effect, Layer, Schema } from 'effect'
