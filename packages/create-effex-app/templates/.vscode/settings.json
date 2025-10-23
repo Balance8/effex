@@ -26,5 +26,6 @@
     {
       "text": "Follow conventional commits format. Format: type(scope): subject. Types: feat, fix, docs, style, refactor, perf, test, build, ci, chore, revert. Rules: header max 72 chars, type lowercase, subject lowercase, imperative mood (\"add\" not \"added\"), no period at end."
     }
-  ]
+  ],
+  "npm.packageManager": "{{packageManager}}"
 }
