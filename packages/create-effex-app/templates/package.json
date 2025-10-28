@@ -18,7 +18,7 @@
     "{{huskyPrepareScript}}"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.2.5",
+    "@biomejs/biome": "2.3.2",
     "@commitlint/cli": "^20.1.0",
     "@commitlint/config-conventional": "^20.0.0",
     "@workspace/typescript-config": "workspace:*",

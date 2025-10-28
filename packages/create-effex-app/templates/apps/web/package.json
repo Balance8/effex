@@ -18,7 +18,6 @@
     "@workspace/api": "workspace:*",
     "@workspace/database": "workspace:*",
     "@workspace/ui": "workspace:*",
-    "babel-plugin-react-compiler": "^1.0.0",
     "effect": "^3.17.14",
     "lucide-react": "^0.546.0",
     "next": "16.0.1-canary.6",
@@ -28,6 +27,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.15",
+    "babel-plugin-react-compiler": "^1.0.0",
     "@types/node": "^24.9.1",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
