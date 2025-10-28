@@ -26,14 +26,14 @@ This is the Expo React Native app with NativeWind v5 (Tailwind CSS v4) for styli
 Start the Expo development server:
 
 ```bash
-{{packageManager}} run dev:expo
+{{packageManagerName}} run dev:expo
 ```
 
 Or from the expo directory:
 
 ```bash
 cd apps/expo
-{{packageManager}} run dev
+{{packageManagerName}} run dev
 ```
 
 ### Running on Devices
@@ -41,13 +41,13 @@ cd apps/expo
 #### iOS Simulator
 
 ```bash
-{{packageManager}} run dev:ios
+{{packageManagerName}} run dev:ios
 ```
 
 #### Android Emulator
 
 ```bash
-{{packageManager}} run dev:android
+{{packageManagerName}} run dev:android
 ```
 
 #### Physical Device

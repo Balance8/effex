@@ -162,5 +162,5 @@
       }
     }
   ],
-  "extends": ["ultracite"]
+  "extends": ["ultracite/core", "ultracite/next", "ultracite/react"]
 }

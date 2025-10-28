@@ -10,6 +10,7 @@
     "includes": [
       "apps/**/*.{js,jsx,ts,tsx,json,jsonc}",
       "packages/**/*.{js,jsx,ts,tsx,json,jsonc}",
+      "src/**/*.{js,jsx,ts,tsx,json,jsonc}",
       "*.{js,jsx,ts,tsx,json,jsonc}"
     ],
     "ignoreUnknown": true
@@ -23,6 +24,33 @@
     "lineWidth": 100,
     "attributePosition": "auto",
     "bracketSpacing": true
+  },
+  "assist": {
+    "actions": {
+      "source": {
+        "organizeImports": {
+          "level": "on",
+          "options": {
+            "groups": [
+              [
+                ":URL:",
+                ":PACKAGE_WITH_PROTOCOL:",
+                ":BUN:",
+                ":NODE:",
+                ":PACKAGE:",
+                "!@workspace/**"
+              ],
+              ":BLANK_LINE:",
+              "@workspace/**",
+              ":BLANK_LINE:",
+              ":ALIAS:",
+              ":BLANK_LINE:",
+              ":PATH:"
+            ]
+          }
+        }
+      }
+    }
   },
   "linter": {
     "enabled": true,
@@ -62,10 +90,18 @@
         "noForEach": "off",
         "useLiteralKeys": "off",
         "noExcessiveCognitiveComplexity": "off"
+      },
+      "nursery": {
+        "useSortedClasses": {
+          "level": "error",
+          "options": {},
+          "fix": "safe"
+        }
       }
     }
   },
   "javascript": {
+    "globals": ["Bun"],
     "formatter": {
       "jsxQuoteStyle": "single",
       "quoteProperties": "asNeeded",
@@ -95,6 +131,7 @@
         "**/generated/**",
         "apps/web/next-env.d.ts",
         ".husky/**",
+        ".augment/**",
         "commitlint.config.{mjs,js}"
       ],
       "linter": {
@@ -105,15 +142,25 @@
       }
     },
     {
-      "includes": ["**/theme.css"],
+      "includes": ["**/*skeleton.tsx", "**/*animation*.tsx"],
       "linter": {
         "rules": {
-          "suspicious": {
-            "noDuplicateCustomProperties": "off"
+          "style": {
+            "noMagicNumbers": "off"
+          }
+        }
+      }
+    },
+    {
+      "includes": ["**/commitlint.config.js"],
+      "linter": {
+        "rules": {
+          "style": {
+            "noMagicNumbers": "off"
           }
         }
       }
     }
   ],
-  "extends": ["ultracite"]
+  "extends": ["ultracite/core", "ultracite/next", "ultracite/react"]
 }

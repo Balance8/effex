@@ -15,14 +15,14 @@ A modern full-stack application built with:
 ### Prerequisites
 
 - Node.js 20+
-- {{packageManager}}
+- {{packageManagerName}}
 
 ### Installation
 
 Dependencies should already be installed. If not, run:
 
 ```bash
-{{packageManager}} install
+{{packageManagerName}} install
 ```
 
 ### Database Setup
@@ -34,7 +34,7 @@ The fastest way to get started is using Prisma's built-in local database:
 1. Start a local Prisma Postgres instance:
 
 ```bash
-{{packageManager}} run db:dev
+{{packageManagerName}} run db:dev
 ```
 
 2. Copy the connection string from the output to `.env`:
@@ -51,13 +51,13 @@ DATABASE_URL="postgres://user:pass@localhost:5432/dbname"
 3. Push schema to database:
 
 ```bash
-{{packageManager}} run db:push
+{{packageManagerName}} run db:push
 ```
 
 4. (Optional) Seed the database:
 
 ```bash
-{{packageManager}} run db:seed
+{{packageManagerName}} run db:seed
 ```
 
 #### Using External PostgreSQL
@@ -73,7 +73,7 @@ cp .env.example .env
 2. Generate Prisma client:
 
 ```bash
-{{packageManager}} run db:generate
+{{packageManagerName}} run db:generate
 ```
 
 > **Note:** This generates both the Prisma client and Effect-TS services from your schema.
@@ -81,13 +81,13 @@ cp .env.example .env
 3. Run database migrations:
 
 ```bash
-{{packageManager}} run db:migrate
+{{packageManagerName}} run db:migrate
 ```
 
 4. (Optional) Seed the database:
 
 ```bash
-{{packageManager}} run db:seed
+{{packageManagerName}} run db:seed
 ```
 
 ### Development
@@ -95,17 +95,17 @@ cp .env.example .env
 Start all development servers:
 
 ```bash
-{{packageManager}} run dev
+{{packageManagerName}} run dev
 ```
 
 Or start individual apps:
 
 ```bash
 # Web app only
-{{packageManager}} run dev:web
+{{packageManagerName}} run dev:web
 
 # Expo app only
-{{packageManager}} run dev:expo
+{{packageManagerName}} run dev:expo
 ```
 
 The web app will be available at [http://localhost:3000](http://localhost:3000).
@@ -127,7 +127,7 @@ const program = Effect.gen(function* () {
 });
 ```
 
-When you modify your Prisma schema, regenerate the services by running `{{packageManager}} run db:generate` and commit the changes.
+When you modify your Prisma schema, regenerate the services by running `{{packageManagerName}} run db:generate` and commit the changes.
 
 ## Project Structure
 
@@ -150,28 +150,28 @@ When you modify your Prisma schema, regenerate the services by running `{{packag
 
 ### Build & Development
 
-- `{{packageManager}} run dev` - Start all development servers
-- `{{packageManager}} run dev:web` - Start web app only
-- `{{packageManager}} run dev:expo` - Start Expo app only
-- `{{packageManager}} run build` - Build all packages
+- `{{packageManagerName}} run dev` - Start all development servers
+- `{{packageManagerName}} run dev:web` - Start web app only
+- `{{packageManagerName}} run dev:expo` - Start Expo app only
+- `{{packageManagerName}} run build` - Build all packages
 
 ### Code Quality
 
-- `{{packageManager}} run format-and-lint` - Check code formatting and linting
-- `{{packageManager}} run format-and-lint:fix` - Fix code formatting and linting issues
+- `{{packageManagerName}} run format-and-lint` - Check code formatting and linting
+- `{{packageManagerName}} run format-and-lint:fix` - Fix code formatting and linting issues
 
 ### Database
 
-- `{{packageManager}} run db:dev` - Start local Prisma Postgres instance
-- `{{packageManager}} run db:generate` - Generate Prisma client and Effect services
-- `{{packageManager}} run db:migrate` - Run database migrations
-- `{{packageManager}} run db:push` - Push schema to database
-- `{{packageManager}} run db:seed` - Seed the database
-- `{{packageManager}} run db:studio` - Open Prisma Studio
+- `{{packageManagerName}} run db:dev` - Start local Prisma Postgres instance
+- `{{packageManagerName}} run db:generate` - Generate Prisma client and Effect services
+- `{{packageManagerName}} run db:migrate` - Run database migrations
+- `{{packageManagerName}} run db:push` - Push schema to database
+- `{{packageManagerName}} run db:seed` - Seed the database
+- `{{packageManagerName}} run db:studio` - Open Prisma Studio
 
 ### Effect Services
 
-- `{{packageManager}} run effect:generate` - Regenerate Effect services from Prisma schema (auto-runs with db:generate)
+- `{{packageManagerName}} run effect:generate` - Regenerate Effect services from Prisma schema (auto-runs with db:generate)
 
 ## Learn More
 

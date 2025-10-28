@@ -10,7 +10,7 @@ const PACKAGE_MANAGER_EXECUTABLES = {
   npm: 'npx',
 } as const
 
-const _PACKAGE_MANAGER_INSTALL = {
+const PACKAGE_MANAGER_INSTALL = {
   bun: 'bun install',
   pnpm: 'pnpm install',
   npm: 'npm install',
@@ -24,9 +24,13 @@ export const replaceVariables = (content: string, variables: Record<string, stri
       const version = PACKAGE_MANAGER_VERSIONS[value as keyof typeof PACKAGE_MANAGER_VERSIONS]
       const executable =
         PACKAGE_MANAGER_EXECUTABLES[value as keyof typeof PACKAGE_MANAGER_EXECUTABLES]
-      const install = _PACKAGE_MANAGER_INSTALL[value as keyof typeof _PACKAGE_MANAGER_INSTALL]
+      const install = PACKAGE_MANAGER_INSTALL[value as keyof typeof PACKAGE_MANAGER_INSTALL]
       const regex = new RegExp(`{{${key}}}`, 'g')
       result = result.replace(regex, `${value}@${version}`)
+      const nameRegex = /{{packageManagerName}}/g
+      result = result.replace(nameRegex, value)
+      const versionRegex = /{{packageManagerVersion}}/g
+      result = result.replace(versionRegex, version)
       const executableRegex = /{{packageManagerExecutable}}/g
       result = result.replace(executableRegex, executable)
       const installRegex = /{{packageManagerInstall}}/g
