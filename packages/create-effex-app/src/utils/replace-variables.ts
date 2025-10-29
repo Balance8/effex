@@ -1,5 +1,5 @@
 const PACKAGE_MANAGER_VERSIONS = {
-  bun: '1.3.0',
+  bun: '1.3.1',
   pnpm: '10.18.3',
   npm: '11.6.2',
 } as const

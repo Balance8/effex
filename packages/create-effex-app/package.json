@@ -1,6 +1,6 @@
 {
   "name": "create-effex-app",
-  "version": "0.1.39",
+  "version": "0.1.40",
   "description": "Create a new Effex app with a single command",
   "type": "module",
   "bin": {
