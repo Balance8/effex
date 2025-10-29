@@ -47,3 +47,6 @@ expo-env.d.ts
 
 # Metro
 .cache/
+
+*storybook.log
+storybook-static
